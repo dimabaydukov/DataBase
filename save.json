@@ -1,0 +1,38 @@
+[
+  {
+    "id_task": 1,
+    "name_task": "заменить термопасту",
+    "description_task": "заменить термопасту в охладительной системе на ноутбуке клиента",
+    "date_create": "2022-05-05",
+    "date_deadline": "2022-05-15",
+    "priority": "1",
+    "date_end": null,
+    "status": false,
+    "contract_id": 1,
+    "emp_name": null
+  },
+  {
+    "id_task": 2,
+    "name_task": "заменить матрицу",
+    "description_task": "заменить матрицу на ноутбуке клиента",
+    "date_create": "2022-05-05",
+    "date_deadline": "2022-05-15",
+    "priority": "1",
+    "date_end": null,
+    "status": false,
+    "contract_id": 1,
+    "emp_name": null
+  },
+  {
+    "id_task": 14,
+    "name_task": "починить что-то",
+    "description_task": "надо починить",
+    "date_create": "2022-10-14",
+    "date_deadline": "2022-10-24",
+    "priority": "1",
+    "date_end": null,
+    "status": false,
+    "contract_id": 1,
+    "emp_name": "Bob"
+  }
+]
