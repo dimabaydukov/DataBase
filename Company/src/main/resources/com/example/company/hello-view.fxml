@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="351.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.controller.HelloController">
+   <children>
+      <Button fx:id="signInButton" layoutX="253.0" layoutY="151.0" mnemonicParsing="false" onAction="#onSignInClick"
+              text="Войти" />
+      <Button fx:id="registrationButton" layoutX="214.0" layoutY="186.0" mnemonicParsing="false" onAction="#onRegistrationClick"
+              text="Зарегистрироваться" />
+   </children>
+</Pane>
