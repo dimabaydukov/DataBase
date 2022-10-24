@@ -1,4 +1,4 @@
-package com.example.company.controller;
+package com.example.company;
 
 import com.example.company.model.DataBaseHandler;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -20,24 +21,32 @@ public class RegistrationFormController {
     public ChoiceBox<String> choiceRole;
     public Button registrationButton;
     public Button backButton;
+    public Label labelError;
 
     public void onRegistrationClick(){
         String login = loginNewUser.getText().trim();
         String pass = passwordNewUser.getText().trim();
-        String role;
-        if (choiceRole.getValue().equals("Тех специалист"))
-            role = "tech_spec";
-        else
-            role = "manager";
+        String role = choiceRole.getSelectionModel().getSelectedItem();;
 
-        if (!login.equals("") && !pass.equals("")){
-            DataBaseHandler dataBaseHandler = new DataBaseHandler();
-            dataBaseHandler.Registering(login, pass, role);
+        labelError.setText("");
+        if (role != null && !role.equals("")) {
+            if (choiceRole.getValue().equals("Тех специалист"))
+                role = "tech_spec";
+            else
+                role = "manager";
+
+            if (!login.equals("") && !login.equals("Введите логин!!!") &&
+                    !pass.equals("") && !pass.equals("Введите пароль!!!")){
+                DataBaseHandler dataBaseHandler = new DataBaseHandler();
+                dataBaseHandler.Registering(login, pass, role);
+            }
+            else if (login.equals(""))
+                loginNewUser.setText("Введите логин!!!");
+            else
+                passwordNewUser.setText("Введите пароль!!!");
         }
-        else if (login.equals(""))
-            loginNewUser.setText("Введите логин!!!");
         else
-            passwordNewUser.setText("Введите пароль!!!");
+            labelError.setText("Необходимо выбрать роль!!!");
     }
 
     public void onBackClick(){

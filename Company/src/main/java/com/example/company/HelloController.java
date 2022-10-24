@@ -1,4 +1,4 @@
-package com.example.company.controller;
+package com.example.company;
 
 import com.example.company.HelloApplication;
 import javafx.fxml.FXML;
@@ -21,12 +21,25 @@ public class HelloController {
 
     @FXML
     protected void onSignInClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("sign_in_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
 
+            Stage stageThis = (Stage) registrationButton.getScene().getWindow();
+            stageThis.close();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
     }
 
     @FXML
     protected void onRegistrationClick() {
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("registration_form.fxml"));

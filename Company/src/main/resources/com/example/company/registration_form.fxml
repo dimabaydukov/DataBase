@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="241.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.controller.RegistrationFormController">
+<AnchorPane prefHeight="241.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.RegistrationFormController">
    <children>
       <Group layoutX="46.0" layoutY="53.0">
          <children>
@@ -35,11 +35,11 @@
          </children>
       </Group>
       <Button fx:id="registrationButton" layoutX="236.0" layoutY="189.0" mnemonicParsing="false" onAction="#onRegistrationClick" text="Зарегистрироваться" />
-      <Button fx:id="backButton" layoutX="550.0" layoutY="205.0" mnemonicParsing="false" prefHeight="20.0"
-              prefWidth="36.0" text="Назад" onAction="#onBackClick">
+      <Button fx:id="backButton" layoutX="550.0" layoutY="205.0" mnemonicParsing="false" onAction="#onBackClick" prefHeight="20.0" prefWidth="36.0" text="Назад">
          <font>
             <Font size="8.0" />
          </font>
       </Button>
+      <Label fx:id="labelError" layoutX="119.0" layoutY="21.0" textFill="#e72828" />
    </children>
 </AnchorPane>
