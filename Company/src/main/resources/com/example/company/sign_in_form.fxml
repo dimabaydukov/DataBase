@@ -26,5 +26,6 @@
                 <Font size="8.0" />
             </font>
         </Button>
+        <Label fx:id="labelError" layoutX="119.0" layoutY="21.0" textFill="#e72828" />
     </children>
 </AnchorPane>

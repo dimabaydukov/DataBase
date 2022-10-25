@@ -14,25 +14,23 @@ public class DataBaseHandler extends Config {
         connection = DriverManager.getConnection(connectStr, dbUser, dbPassword);
     }
 
-    public Connection getDbConnection(String login, String password) throws ClassNotFoundException, SQLException{
+    public Connection getDbConnection(String login, String password) throws ClassNotFoundException {
         String connectStr = "jdbc:postgresql://localhost:5432/Company";
         Class.forName("org.postgresql.Driver");
-        connection = DriverManager.getConnection(connectStr, login, password);
+        try {
+            connection = DriverManager.getConnection(connectStr, login, password);
+        } catch (SQLException e) {
+            return null;
+        }
         return connection;
     }
 
-    public void Registering(String login, String password, String role) {
-        try {
-            getDbConnection();
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public boolean registering(String login, String password, String role) throws SQLException, ClassNotFoundException {
+        getDbConnection();
+
         Statement statement = null;
-        try {
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        statement = connection.createStatement();
+
 
         String query = "CREATE ROLE " + login + " WITH\n" +
                 "LOGIN\n" +
@@ -44,12 +42,13 @@ public class DataBaseHandler extends Config {
                 "PASSWORD \'" + password + "\';\n" +
                 "GRANT " + role + " TO " + login;
         try {
-            statement.executeQuery(query);
+            statement.executeUpdate(query);
             //проверить успешно ли выполнился запрос
             statement.close();
             connection.close();
+            return true;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 }

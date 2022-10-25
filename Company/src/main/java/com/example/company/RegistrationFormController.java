@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class RegistrationFormController {
     public Button backButton;
     public Label labelError;
 
-    public void onRegistrationClick(){
+    public void onRegistrationClick() throws SQLException, ClassNotFoundException {
         String login = loginNewUser.getText().trim();
         String pass = passwordNewUser.getText().trim();
         String role = choiceRole.getSelectionModel().getSelectedItem();;
@@ -38,7 +39,12 @@ public class RegistrationFormController {
             if (!login.equals("") && !login.equals("Введите логин!!!") &&
                     !pass.equals("") && !pass.equals("Введите пароль!!!")){
                 DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                dataBaseHandler.Registering(login, pass, role);
+                boolean flag = dataBaseHandler.registering(login, pass, role);
+                if (flag){
+                    //переход на новую страницу
+                }
+                else
+                    labelError.setText("Такой логин уже существует!");
             }
             else if (login.equals(""))
                 loginNewUser.setText("Введите логин!!!");
