@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskFormController">
+
+    <children>
+        <Group layoutX="46.0" layoutY="53.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Название" />
+                <TextField fx:id="nameTask" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="94.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Описание" />
+            <TextArea layoutX="73.0" prefHeight="65.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="180.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Дедлайн" />
+            <DatePicker fx:id="dateDeadlineTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="225.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Приоритет" />
+            <Spinner fx:id="priorityTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+            </children>
+        </Group>
+        <Group layoutX="336.0" layoutY="225.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Контракт" />
+                <Spinner fx:id="contractTask" layoutX="65.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="270.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Сотрудник" />
+                <Spinner fx:id="employeeTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="315.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="112.0" text="Дата окончания" />
+                <DatePicker fx:id="dateEndTask" layoutX="101.0" layoutY="-3.0" prefHeight="25.0" prefWidth="391.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="360.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="112.0" text="Дата создания:" />
+                <Label fx:id="dateCreateTask" layoutX="90.0" prefHeight="18.0" prefWidth="112.0" text="*автозаполнение*" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="380.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="112.0" text="Статус:" />
+                <Label fx:id="statusTask" layoutX="45.0" prefHeight="18.0" prefWidth="112.0" text="*автозаполнение*" />
+            </children>
+        </Group>
+      <Button fx:id="saveButtonTask" layoutX="398.0" layoutY="398.0" mnemonicParsing="false" text="Сохранить" />
+      <Button fx:id="backButton" layoutX="489.0" layoutY="398.0" mnemonicParsing="false" text="Назад" />
+    </children>
+
+</AnchorPane>
