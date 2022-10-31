@@ -23,11 +23,17 @@ public class RegistrationFormController {
     public Button registrationButton;
     public Button backButton;
     public Label labelError;
+    public TextField nameNewUser;
+    public TextField phoneNewUser;
+    public TextField emailNewUser;
 
     public void onRegistrationClick() throws SQLException, ClassNotFoundException {
         String login = loginNewUser.getText().trim();
         String pass = passwordNewUser.getText().trim();
-        String role = choiceRole.getSelectionModel().getSelectedItem();;
+        String role = choiceRole.getSelectionModel().getSelectedItem();
+        String name = nameNewUser.getText().trim();
+        String phone = phoneNewUser.getText().trim();
+        String email = emailNewUser.getText().trim();
 
         labelError.setText("");
         if (role != null && !role.equals("")) {
@@ -38,13 +44,16 @@ public class RegistrationFormController {
 
             if (!login.equals("") && !login.equals("Введите логин!!!") &&
                     !pass.equals("") && !pass.equals("Введите пароль!!!")){
-                DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                boolean flag = dataBaseHandler.registering(login, pass, role);
-                if (flag){
-                    //переход на новую страницу
+                if (name.equals("") || phone.equals("") || email.equals(""))
+                    labelError.setText("Введены не все данные!");
+                else {
+                    DataBaseHandler dataBaseHandler = new DataBaseHandler();
+                    boolean flag = dataBaseHandler.registering(login, pass, role, name, phone, email);
+                    if (flag) {
+                        //переход на новую страницу
+                    } else
+                        labelError.setText("Такой логин уже существует!");
                 }
-                else
-                    labelError.setText("Такой логин уже существует!");
             }
             else if (login.equals(""))
                 loginNewUser.setText("Введите логин!!!");

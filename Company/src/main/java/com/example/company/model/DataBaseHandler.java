@@ -1,9 +1,7 @@
 package com.example.company.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
 
 public class DataBaseHandler extends Config {
     Connection connection = null;
@@ -25,14 +23,15 @@ public class DataBaseHandler extends Config {
         return connection;
     }
 
-    public boolean registering(String login, String password, String role) throws SQLException, ClassNotFoundException {
+    public boolean registering(String login, String password, String role,
+                               String name, String phone, String email) throws SQLException, ClassNotFoundException {
         getDbConnection();
 
         Statement statement = null;
         statement = connection.createStatement();
 
 
-        String query = "CREATE ROLE " + login + " WITH\n" +
+        String queryUser = "CREATE ROLE " + login + " WITH\n" +
                 "LOGIN\n" +
                 "NOSUPERUSER\n" +
                 "INHERIT\n" +
@@ -41,13 +40,24 @@ public class DataBaseHandler extends Config {
                 "NOREPLICATION\n" +
                 "PASSWORD \'" + password + "\';\n" +
                 "GRANT " + role + " TO " + login;
+
+        String queryEmployee = "INSERT INTO public.\"Employee\" (name_employee, phone_number_employee, email_employee, title) " +
+                "VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(queryEmployee);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, phone);
+        preparedStatement.setString(3, email);
+        preparedStatement.setString(4, role);
+
         try {
-            statement.executeUpdate(query);
+            statement.executeUpdate(queryUser);
             //проверить успешно ли выполнился запрос
+            preparedStatement.executeUpdate();
             statement.close();
             connection.close();
             return true;
         } catch (SQLException e) {
+
             return false;
         }
     }
