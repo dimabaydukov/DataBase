@@ -31,7 +31,6 @@ public class RegistrationFormController {
         String login = loginNewUser.getText().trim();
         String pass = passwordNewUser.getText().trim();
         String role = choiceRole.getSelectionModel().getSelectedItem();
-        String name = nameNewUser.getText().trim();
         String phone = phoneNewUser.getText().trim();
         String email = emailNewUser.getText().trim();
 
@@ -44,13 +43,13 @@ public class RegistrationFormController {
 
             if (!login.equals("") && !login.equals("Введите логин!!!") &&
                     !pass.equals("") && !pass.equals("Введите пароль!!!")){
-                if (name.equals("") || phone.equals("") || email.equals(""))
+                if (phone.equals("") || email.equals(""))
                     labelError.setText("Введены не все данные!");
                 else {
                     DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                    boolean flag = dataBaseHandler.registering(login, pass, role, name, phone, email);
+                    boolean flag = dataBaseHandler.registering(login, pass, role, phone, email);
                     if (flag) {
-                        //переход на новую страницу
+                        goToSignInForm();
                     } else
                         labelError.setText("Такой логин уже существует!");
                 }
@@ -71,6 +70,24 @@ public class RegistrationFormController {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+
+            Stage stageThis = (Stage) backButton.getScene().getWindow();
+            stageThis.close();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    private void goToSignInForm(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("sign_in_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Sign in");
             stage.setScene(scene);
             stage.show();
 

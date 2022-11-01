@@ -1,7 +1,6 @@
 package com.example.company;
 
 import com.example.company.model.DataBaseHandler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,6 +25,8 @@ public class SignInFormController {
         String login = loginUser.getText().trim();
         String pass = passwordUser.getText().trim();
 
+        labelError.setText("");
+
         if (!login.equals("") && !login.equals("Введите логин!!!") &&
                 !pass.equals("") && !pass.equals("Введите пароль!!!")){
             DataBaseHandler dataBaseHandler = new DataBaseHandler();
@@ -33,8 +34,15 @@ public class SignInFormController {
             if (connection == null)
                 labelError.setText("Данные введены неверно");
             else {
-                loginUser.setText("Yes");
-                // переход на новую страницу
+                String role = dataBaseHandler.checkRole(login);
+                if (role != null){
+                    if (role.equals("manager")) {
+                        goToManagerStartForm();
+                    }
+                    if (role.equals("tech_spec")) {
+                        goToTechSpecStartForm();
+                    }
+                }
             }
         }
         else if (login.equals(""))
@@ -50,6 +58,42 @@ public class SignInFormController {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+
+            Stage stageThis = (Stage) backButton.getScene().getWindow();
+            stageThis.close();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    private void goToManagerStartForm(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("manager_start_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Menu");
+            stage.setScene(scene);
+            stage.show();
+
+            Stage stageThis = (Stage) backButton.getScene().getWindow();
+            stageThis.close();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    private void goToTechSpecStartForm(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("tech_spec_start_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Menu");
             stage.setScene(scene);
             stage.show();
 
