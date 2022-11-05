@@ -1,5 +1,6 @@
 package com.example.company;
 
+import com.example.company.model.DataBaseHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +19,11 @@ public class HelloApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        DataBaseHandler.connection.close();
     }
 
     public static void main(String[] args) {

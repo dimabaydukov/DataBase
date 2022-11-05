@@ -8,10 +8,13 @@
       <Button fx:id="addNewTaskBtn" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" onAction="#addNewTaskForm"
               text="Добавление нового задания"/>
       <Button fx:id="allTasksBtn" layoutX="60.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="Просмотр всех заданий" />
-      <Button fx:id="addNewContractBtn" layoutX="59.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="Добавление контракта" />
-      <Button fx:id="addNewClientBtn" layoutX="60.0" layoutY="164.0" mnemonicParsing="false" text="Добавление нового клиента" />
+      <Button fx:id="addNewContractBtn" layoutX="59.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0"
+              onAction="#addNewContractForm" text="Добавление контракта" />
+      <Button fx:id="addNewClientBtn" layoutX="60.0" layoutY="164.0" mnemonicParsing="false" onAction="#addNewClientForm"
+              text="Добавление нового клиента" />
       <Button fx:id="allClientsBtn" layoutX="61.0" layoutY="203.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="Просмотр всех клиентов" />
-      <Button fx:id="addNewDetailBtn" layoutX="61.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Добавление детали" />
+      <Button fx:id="addNewDetailBtn" layoutX="61.0" layoutY="241.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0"
+              onAction="#addNewDetailForm" text="Добавление детали" />
       <Button fx:id="allDetailsBtn" layoutX="62.0" layoutY="279.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Просмотр деталей" />
    </children>
 </AnchorPane>

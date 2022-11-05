@@ -1,10 +1,12 @@
 package com.example.company.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DataBaseHandler extends Config {
-    Connection connection = null;
+    public static Connection connection = null;
 
     private void getDbConnection() throws ClassNotFoundException, SQLException{
         String connectStr = "jdbc:postgresql://localhost:5432/Company";
@@ -75,5 +77,53 @@ public class DataBaseHandler extends Config {
         }
         preparedStatement.close();
         return null;
+    }
+
+    public void addDetail(String name, String serialNumber) throws SQLException {
+        String queryAddDetail = "INSERT INTO public.\"Detail\" (name_detail, serial_number) " +
+                "VALUES (?, ?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddDetail);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, serialNumber);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public void addClient(String name, String phoneNumber, String email, String addressCl, String type) throws SQLException {
+        String queryAddClient = "INSERT INTO public.\"Client\" (name_client, phone_number_client, email_client, " +
+                "address, client_type) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddClient);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, phoneNumber);
+        preparedStatement.setString(3, email);
+        preparedStatement.setString(4, addressCl);
+        preparedStatement.setString(5, type);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static List<Integer> selectClients() throws SQLException {
+        String query = "SELECT id_client FROM public.\"Client\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<Integer> listIdClients = new ArrayList<>();
+        while(resultSet.next()){
+            int id = resultSet.getInt("id_client");
+            listIdClients.add(id);
+        }
+        statement.close();
+        return listIdClients;
+    }
+
+    public void addContract(String description, Date date, int idClient) throws SQLException {
+        String queryAddContract = "INSERT INTO public.\"Contract\" (description_conract, date_conract, id_client) " +
+                "VALUES (?, ?, ?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddContract);
+        preparedStatement.setString(1, description);
+        preparedStatement.setDate(2, date);
+        preparedStatement.setInt(3, idClient);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
     }
 }

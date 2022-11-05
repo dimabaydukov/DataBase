@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="308.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ClientFormController">
+
+    <children>
+        <Group layoutX="46.0" layoutY="53.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Имя клиента" />
+                <TextField fx:id="nameClient" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="98.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Номер телефона" />
+                <TextField fx:id="phoneNumberClient" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="143.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Эл. почта" />
+                <TextField fx:id="emailClient" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="188.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Адрес" />
+                <TextField fx:id="addressClient" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Button fx:id="saveButtonClient" layoutX="432.0" layoutY="249.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
+        <Button fx:id="backButton" layoutX="520.0" layoutY="249.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" text="Назад" />
+    </children>
+
+</AnchorPane>

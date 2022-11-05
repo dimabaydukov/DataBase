@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="263.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ContractFormController">
+
+    <children>
+        <Group layoutX="46.0" layoutY="53.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Описание" />
+                <TextField fx:id="descriptionContract" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="88.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="Дата" />
+                <DatePicker fx:id="dateContract" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="123.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="105.0" text="Номер клиента" />
+                <ComboBox fx:id="clientIdContract" layoutX="105.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+            </children>
+        </Group>
+        <Button fx:id="saveButtonContract" layoutX="254.0" layoutY="186.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
+        <Button fx:id="backButton" layoutX="519.0" layoutY="212.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" text="Назад" />
+    </children>
+
+</AnchorPane>

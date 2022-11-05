@@ -16,31 +16,31 @@
         <Group layoutX="46.0" layoutY="94.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Описание" />
-            <TextArea layoutX="73.0" prefHeight="65.0" prefWidth="417.0" />
+                <TextArea fx:id="descriptionTask" layoutX="73.0" prefHeight="65.0" prefWidth="417.0" />
             </children>
         </Group>
         <Group layoutX="46.0" layoutY="180.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Дедлайн" />
-            <DatePicker fx:id="dateDeadlineTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
+                <DatePicker fx:id="dateDeadlineTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
             </children>
         </Group>
         <Group layoutX="46.0" layoutY="225.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Приоритет" />
-            <Spinner fx:id="priorityTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+                <ComboBox fx:id="priorityTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
             </children>
         </Group>
         <Group layoutX="336.0" layoutY="225.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Контракт" />
-                <Spinner fx:id="contractTask" layoutX="65.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+                <ComboBox fx:id="contractTask" layoutX="65.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
             </children>
         </Group>
         <Group layoutX="46.0" layoutY="270.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Сотрудник" />
-                <Spinner fx:id="employeeTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
+                <ComboBox fx:id="employeeTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
             </children>
         </Group>
         <Group layoutX="46.0" layoutY="315.0">

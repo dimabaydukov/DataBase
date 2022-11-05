@@ -30,8 +30,8 @@ public class SignInFormController {
         if (!login.equals("") && !login.equals("Введите логин!!!") &&
                 !pass.equals("") && !pass.equals("Введите пароль!!!")){
             DataBaseHandler dataBaseHandler = new DataBaseHandler();
-            Connection connection = dataBaseHandler.getDbConnection(login, pass);
-            if (connection == null)
+            DataBaseHandler.connection = dataBaseHandler.getDbConnection(login, pass);
+            if (DataBaseHandler.connection == null)
                 labelError.setText("Данные введены неверно");
             else {
                 String role = dataBaseHandler.checkRole(login);
