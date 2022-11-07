@@ -17,7 +17,7 @@
         <Group layoutX="46.0" layoutY="98.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Пароль" />
-                <TextField fx:id="passwordUser" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+                <PasswordField fx:id="passwordUser" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
             </children>
         </Group>
         <Button fx:id="signInButton" layoutX="276.0" layoutY="143.0" mnemonicParsing="false" onAction="#onSignInClick" text="Войти" />

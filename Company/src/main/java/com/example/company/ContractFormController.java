@@ -27,7 +27,7 @@ public class ContractFormController implements Initializable {
         ObservableList<Integer> items = FXCollections.observableArrayList();
         clientIdContract.getItems().setAll(items);
         try {
-            items.setAll(DataBaseHandler.selectClients());
+            items.setAll(DataBaseHandler.selectIdClients());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

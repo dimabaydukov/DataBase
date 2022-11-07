@@ -3,9 +3,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskListFormController">
+<AnchorPane prefHeight="462.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskListFormController">
    <children>
-      <ListView fx:id="listTasks" layoutX="17.0" layoutY="15.0" prefHeight="365.0" prefWidth="566.0" />
+      <TableView fx:id="listTasks" layoutX="17.0" layoutY="15.0" prefHeight="418.0" prefWidth="172.0" />
+      <Button fx:id="editBtn" layoutX="473.0" layoutY="407.0" mnemonicParsing="false" text="Редактировать" />
+      <Button fx:id="deleteBtn" layoutX="401.0" layoutY="407.0" mnemonicParsing="false" text="Удалить" />
+      <Label layoutX="211.0" layoutY="34.0" text="Название" />
+      <Label fx:id="nameLabel" layoutX="371.0" layoutY="34.0" text="*name*" />
+      <Label layoutX="211.0" layoutY="69.0" text="Описание" />
+      <Label fx:id="descriptionLabel" layoutX="371.0" layoutY="69.0" minHeight="-Infinity" prefWidth="200.0"
+             text="*description*" wrapText="true" />
+      <Label layoutX="209.0" layoutY="143.0" text="Дата создания" />
+      <Label fx:id="dateCreateLabel" layoutX="369.0" layoutY="143.0" text="*date create*" />
+      <Label layoutX="209.0" layoutY="180.0" text="Дедлайн" />
+      <Label fx:id="dateDeadlineLabel" layoutX="369.0" layoutY="180.0" text="*deadline*" />
+      <Label layoutX="209.0" layoutY="219.0" text="Приоритет" />
+      <Label fx:id="priorityLabel" layoutX="369.0" layoutY="219.0" text="*priority*" />
+      <Label layoutX="209.0" layoutY="255.0" text="Сотрудник" />
+      <Label fx:id="employeeLabel" layoutX="369.0" layoutY="255.0" text="*employee*" />
+      <Label layoutX="209.0" layoutY="294.0" text="Номер контракта" />
+      <Label fx:id="contractLabel" layoutX="369.0" layoutY="294.0" text="*contract*" />
+      <Label layoutX="209.0" layoutY="329.0" text="Статус" />
+      <Label fx:id="statusLabel" layoutX="369.0" layoutY="329.0" text="*status*" />
+      <Label layoutX="209.0" layoutY="362.0" text="Дата окончания" />
+      <Label fx:id="dateEndLabel" layoutX="369.0" layoutY="362.0" text="*date end*" />
    </children>
 </AnchorPane>

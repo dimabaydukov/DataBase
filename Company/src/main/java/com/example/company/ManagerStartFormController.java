@@ -13,6 +13,7 @@ public class ManagerStartFormController {
     public Button addNewTaskBtn;
     public Button allTasksBtn;
     public Button addNewContractBtn;
+    public Button allContractsBtn;
     public Button addNewClientBtn;
     public Button allClientsBtn;
     public Button addNewDetailBtn;
@@ -71,6 +72,21 @@ public class ManagerStartFormController {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Contract");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public void addNewTaskListForm(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("task_list_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Tasks");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

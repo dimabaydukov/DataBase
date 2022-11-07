@@ -103,7 +103,7 @@ public class DataBaseHandler extends Config {
         preparedStatement.close();
     }
 
-    public static List<Integer> selectClients() throws SQLException {
+    public static List<Integer> selectIdClients() throws SQLException {
         String query = "SELECT id_client FROM public.\"Client\"";
         Statement statement = DataBaseHandler.connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
@@ -116,6 +116,107 @@ public class DataBaseHandler extends Config {
         return listIdClients;
     }
 
+    public static List<Integer> selectIdContracts() throws SQLException {
+        String query = "SELECT id_contract FROM public.\"Contract\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<Integer> listIdContracts = new ArrayList<>();
+        while(resultSet.next()){
+            int id = resultSet.getInt("id_contract");
+            listIdContracts.add(id);
+        }
+        statement.close();
+        return listIdContracts;
+    }
+
+    public static List<String> selectEmployeeNames() throws SQLException {
+        String query = "SELECT name_employee FROM public.\"Employee\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<String> listEmployeeNames = new ArrayList<>();
+        while(resultSet.next()){
+            String name = resultSet.getString("name_employee");
+            listEmployeeNames.add(name);
+        }
+        statement.close();
+        return listEmployeeNames;
+    }
+
+    public static List<TaskModel> selectAllTasks() throws SQLException {
+        String query = "SELECT * FROM public.\"Task\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<TaskModel> list = new ArrayList<>();
+        while(resultSet.next()){
+            TaskModel task = new TaskModel();
+            task.setId(resultSet.getInt("id_task"));
+            task.setName(resultSet.getString("name_task"));
+            task.setDescription(resultSet.getString("description_task"));
+            task.setDateCreate(resultSet.getDate("date_create"));
+            task.setDeadline(resultSet.getDate("date_deadline"));
+            task.setPriority(resultSet.getString("priority"));
+            task.setStatus(resultSet.getBoolean("status"));
+            task.setDateEnd(resultSet.getDate("date_end"));
+            task.setContractId(resultSet.getInt("contract_id"));
+            task.setEmpName(resultSet.getString("emp_name"));
+            list.add(task);
+        }
+        statement.close();
+        return list;
+    }
+
+    public static List<ContractModel> selectAllContracts() throws SQLException {
+        String query = "SELECT * FROM public.\"Contract\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<ContractModel> list = new ArrayList<>();
+        while(resultSet.next()){
+            ContractModel contract = new ContractModel();
+            contract.setId(resultSet.getInt("id_contract"));
+            contract.setDescription(resultSet.getString("description_contract"));
+            contract.setDateCreate(resultSet.getDate("date_contract"));
+            contract.setClientId(resultSet.getInt("id_client"));
+            list.add(contract);
+        }
+        statement.close();
+        return list;
+    }
+
+    public static List<ClientModel> selectAllClients() throws SQLException {
+        String query = "SELECT * FROM public.\"Client\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<ClientModel> list = new ArrayList<>();
+        while(resultSet.next()){
+            ClientModel client = new ClientModel();
+            client.setId(resultSet.getInt("id_client"));
+            client.setName(resultSet.getString("name_client"));
+            client.setPhoneNumber(resultSet.getString("phone_number_client"));
+            client.setEmail(resultSet.getString("email_client"));
+            client.setAddress(resultSet.getString("address"));
+            client.setType(resultSet.getString("client_type"));
+            list.add(client);
+        }
+        statement.close();
+        return list;
+    }
+
+    public static List<DetailModel> selectAllDetails() throws SQLException {
+        String query = "SELECT * FROM public.\"Client\"";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<DetailModel> list = new ArrayList<>();
+        while(resultSet.next()){
+            DetailModel detail = new DetailModel();
+            detail.setId(resultSet.getInt("id_detail"));
+            detail.setName(resultSet.getString("name_detail"));
+            detail.setSerialNumber(resultSet.getString("serial_number"));
+            list.add(detail);
+        }
+        statement.close();
+        return list;
+    }
+
     public void addContract(String description, Date date, int idClient) throws SQLException {
         String queryAddContract = "INSERT INTO public.\"Contract\" (description_conract, date_conract, id_client) " +
                 "VALUES (?, ?, ?)";
@@ -123,6 +224,34 @@ public class DataBaseHandler extends Config {
         preparedStatement.setString(1, description);
         preparedStatement.setDate(2, date);
         preparedStatement.setInt(3, idClient);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+
+        changeTypeClient(idClient);
+    }
+
+    private void changeTypeClient(int id) throws SQLException {
+        String query = "UPDATE public.\"Client\" SET client_type = \'Текущий\' WHERE id_client = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public void addTask(String name, String description, Date dateCreate, Date deadline, String priority, boolean status,
+                        int idContract, String employeeName) throws SQLException {
+        String queryAddTask = "INSERT INTO public.\"Task\" (name_task, description_task, date_create, date_deadline, " +
+                "priority, status, contract_id, emp_name) " +
+                "VALUES (?,?,?,?,?,?,?,?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, description);
+        preparedStatement.setDate(3, dateCreate);
+        preparedStatement.setDate(4, deadline);
+        preparedStatement.setString(5, priority);
+        preparedStatement.setBoolean(6, status);
+        preparedStatement.setInt(7, idContract);
+        preparedStatement.setString(8, employeeName);
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }

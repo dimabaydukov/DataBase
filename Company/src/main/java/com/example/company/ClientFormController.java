@@ -3,6 +3,7 @@ package com.example.company;
 import com.example.company.model.DataBaseHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
@@ -27,5 +28,8 @@ public class ClientFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        Stage stageThis = (Stage) saveButtonClient.getScene().getWindow();
+        stageThis.close();
     }
 }
