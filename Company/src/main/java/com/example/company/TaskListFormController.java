@@ -4,17 +4,23 @@ import com.example.company.model.DataBaseHandler;
 import com.example.company.model.TaskModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TaskListFormController implements Initializable {
     public TableView<TaskModel> listTasks = new TableView<>();
@@ -48,21 +54,7 @@ public class TaskListFormController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<TaskModel, String>("name"));
         listTasks.getColumns().add(nameColumn);
 
-        /*TableColumn<TaskModel, Date> deadlineColumn = new TableColumn<TaskModel, Date>("Дедлайн");
-        deadlineColumn.setCellValueFactory(new PropertyValueFactory<TaskModel, Date>("deadline"));
-        listTasks.getColumns().add(deadlineColumn);
-
-        TableColumn<TaskModel, String> priorityColumn = new TableColumn<TaskModel, String>("Приоритет");
-        priorityColumn.setCellValueFactory(new PropertyValueFactory<TaskModel, String>("priority"));
-        listTasks.getColumns().add(priorityColumn);
-
-        TableColumn<TaskModel, Boolean> statusColumn = new TableColumn<TaskModel, Boolean>("Статус");
-        statusColumn.setCellValueFactory(new PropertyValueFactory<TaskModel, Boolean>("status"));
-        listTasks.getColumns().add(statusColumn);
-
-        TableColumn<TaskModel, String> empColumn = new TableColumn<TaskModel, String>("Сотрудник");
-        empColumn.setCellValueFactory(new PropertyValueFactory<TaskModel, String>("empName"));
-        listTasks.getColumns().add(empColumn);*/
+        showTaskDetails(null);
 
         listTasks.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTaskDetails(newValue)
@@ -104,6 +96,35 @@ public class TaskListFormController implements Initializable {
             contractLabel.setText(null);
             employeeLabel.setText(null);
             statusLabel.setText(null);
+        }
+    }
+
+    public void deleteOnClick() throws SQLException {
+        TaskModel selectedItem = listTasks.getSelectionModel().getSelectedItem();
+        if (selectedItem != null){
+            listTasks.getItems().remove(selectedItem);
+            DataBaseHandler.deleteTask(selectedItem);
+        }
+    }
+
+    public void editOnClick(){
+        try{
+            TaskModel selectedItem = listTasks.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("task_form.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setTitle("Task");
+                stage.setScene(scene);
+                TaskFormController taskFormController = fxmlLoader.getController();
+                taskFormController.setTaskModel(selectedItem);
+                taskFormController.setTaskInForm(selectedItem);
+                stage.show();
+            }
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
     }
 }

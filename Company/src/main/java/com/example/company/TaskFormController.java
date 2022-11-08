@@ -1,6 +1,7 @@
 package com.example.company;
 
 import com.example.company.model.DataBaseHandler;
+import com.example.company.model.TaskModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -25,13 +26,19 @@ public class TaskFormController implements Initializable {
     public Button saveButtonTask;
     public Button backButton;
     public TextArea descriptionTask;
+    ObservableList<Integer> priorityList = FXCollections.observableArrayList(1,2,3);
+    ObservableList<Integer> contractList = FXCollections.observableArrayList();
+    ObservableList<String> employeeList = FXCollections.observableArrayList();
+    TaskModel taskModel = null;
+
+    public void setTaskModel(TaskModel taskModel) {
+        this.taskModel = taskModel;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Integer> priorityList = FXCollections.observableArrayList(1,2,3);
         priorityTask.getItems().setAll(priorityList);
 
-        ObservableList<Integer> contractList = FXCollections.observableArrayList();
         contractTask.getItems().setAll(contractList);
         try {
             contractList.setAll(DataBaseHandler.selectIdContracts());
@@ -40,7 +47,6 @@ public class TaskFormController implements Initializable {
         }
         contractTask.setItems(contractList);
 
-        ObservableList<String> employeeList = FXCollections.observableArrayList();
         employeeTask.getItems().setAll(employeeList);
         try {
             employeeList.setAll(DataBaseHandler.selectEmployeeNames());
@@ -60,10 +66,42 @@ public class TaskFormController implements Initializable {
         int idContract = contractTask.getValue();
         String employeeName = employeeTask.getValue();
 
-        DataBaseHandler dataBaseHandler = new DataBaseHandler();
-        dataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract, employeeName);
+        if (taskModel == null)
+            DataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract, employeeName);
+        else {
+            taskModel.setName(name);
+            taskModel.setDescription(description);
+            taskModel.setDeadline(deadline);
+            taskModel.setPriority(priority);
+            taskModel.setContractId(idContract);
+            taskModel.setEmpName(employeeName);
+            if (dateEndTask.getValue() != null && !dateEndTask.getValue().toString().equals("")){
+                taskModel.setStatus(true);
+                taskModel.setDateEnd(Date.valueOf(dateEndTask.getValue()));
+            }
+            DataBaseHandler.updateTask(taskModel);
+        }
 
         Stage stageThis = (Stage) saveButtonTask.getScene().getWindow();
         stageThis.close();
+    }
+
+    public void setTaskInForm(TaskModel task){
+        nameTask.setText(task.getName());
+        descriptionTask.setText(task.getDescription());
+        priorityTask.setValue(Integer.valueOf(task.getPriority()));
+        if (task.getEmpName() != null)
+            employeeTask.setValue(task.getEmpName());
+        contractTask.setValue(task.getContractId());
+        dateCreateTask.setText(task.getDateCreate().toString());
+        dateDeadlineTask.setValue(task.getDeadline().toLocalDate());
+        if (task.getDateEnd() != null)
+            dateEndTask.setValue(task.getDateEnd().toLocalDate());
+        String status;
+        if (!task.isStatus())
+            status = "В процессе";
+        else
+            status = "Выполнено";
+        statusTask.setText(status);
     }
 }

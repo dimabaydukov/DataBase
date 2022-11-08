@@ -238,7 +238,7 @@ public class DataBaseHandler extends Config {
         preparedStatement.close();
     }
 
-    public void addTask(String name, String description, Date dateCreate, Date deadline, String priority, boolean status,
+    public static void addTask(String name, String description, Date dateCreate, Date deadline, String priority, boolean status,
                         int idContract, String employeeName) throws SQLException {
         String queryAddTask = "INSERT INTO public.\"Task\" (name_task, description_task, date_create, date_deadline, " +
                 "priority, status, contract_id, emp_name) " +
@@ -252,6 +252,40 @@ public class DataBaseHandler extends Config {
         preparedStatement.setBoolean(6, status);
         preparedStatement.setInt(7, idContract);
         preparedStatement.setString(8, employeeName);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void updateTask(TaskModel task) throws SQLException {
+        String queryAddTask = "UPDATE public.\"Task\" SET name_task = ?, description_task = ?, date_deadline = ?," +
+                "priority = ?, status = ?, contract_id = ?, emp_name = ?, date_end = ? " +
+                "WHERE id_task = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setString(1, task.getName());
+        preparedStatement.setString(2, task.getDescription());
+        preparedStatement.setDate(3, task.getDeadline());
+        preparedStatement.setString(4, task.getPriority());
+        preparedStatement.setBoolean(5, task.isStatus());
+        preparedStatement.setInt(6, task.getContractId());
+        preparedStatement.setString(7, task.getEmpName());
+        preparedStatement.setDate(8, task.getDateEnd());
+        preparedStatement.setInt(9, task.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void deleteTask(TaskModel task) throws SQLException {
+        String queryAddTask = "DELETE FROM public.\"Task\" WHERE id_task = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setInt(1, task.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void deleteContract(ContractModel contract) throws SQLException {
+        String queryAddTask = "DELETE FROM public.\"Contract\" WHERE id_contract = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setInt(1, contract.getId());
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
