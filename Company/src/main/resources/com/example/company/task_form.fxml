@@ -61,9 +61,9 @@
                 <Label fx:id="statusTask" layoutX="45.0" prefHeight="18.0" prefWidth="112.0" text="*автозаполнение*" />
             </children>
         </Group>
-      <Button fx:id="saveButtonTask" layoutX="398.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveBtnOnClick"
-              text="Сохранить" />
+      <Button fx:id="saveButtonTask" layoutX="398.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
       <Button fx:id="backButton" layoutX="489.0" layoutY="398.0" mnemonicParsing="false" text="Назад" />
+      <Label fx:id="labelError" layoutX="46.0" layoutY="20.0" textFill="red" />
     </children>
 
 </AnchorPane>

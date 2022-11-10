@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,6 +34,7 @@ public class TaskListFormController implements Initializable {
     public Label contractLabel;
     public Label statusLabel;
     public Label dateEndLabel;
+    public static boolean techSpec = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -120,11 +120,18 @@ public class TaskListFormController implements Initializable {
                 TaskFormController taskFormController = fxmlLoader.getController();
                 taskFormController.setTaskModel(selectedItem);
                 taskFormController.setTaskInForm(selectedItem);
+                if (techSpec){
+                    taskFormController.setUnAvailable();
+                }
                 stage.show();
             }
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
+    }
+
+    public void setUnVisible(){
+        deleteBtn.setVisible(false);
     }
 }

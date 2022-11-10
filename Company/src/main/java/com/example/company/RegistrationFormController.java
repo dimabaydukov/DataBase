@@ -33,6 +33,7 @@ public class RegistrationFormController {
         String role = choiceRole.getSelectionModel().getSelectedItem();
         String phone = phoneNewUser.getText().trim();
         String email = emailNewUser.getText().trim();
+        String name = nameNewUser.getText().trim();
 
         labelError.setText("");
         if (role != null && !role.equals("")) {
@@ -43,15 +44,27 @@ public class RegistrationFormController {
 
             if (!login.equals("") && !login.equals("Введите логин!!!") &&
                     !pass.equals("") && !pass.equals("Введите пароль!!!")){
-                if (phone.equals("") || email.equals(""))
+                if (phone.equals("") || email.equals("") || name.equals(""))
                     labelError.setText("Введены не все данные!");
                 else {
-                    DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                    boolean flag = dataBaseHandler.registering(login, pass, role, phone, email);
-                    if (flag) {
-                        goToSignInForm();
-                    } else
-                        labelError.setText("Такой логин уже существует!");
+                    if (name.length() <= 30 && phone.length() <= 11
+                            && email.length() <= 30 && login.length() <= 10) {
+                        System.out.println(login.length());
+                        DataBaseHandler dataBaseHandler = new DataBaseHandler();
+                        boolean flag = dataBaseHandler.registering(name, pass, role, phone, email, login);
+                        if (flag) {
+                            goToSignInForm();
+                        } else
+                            labelError.setText("Такой логин уже существует!");
+                    }
+                    else if (nameNewUser.getText().length() > 30)
+                        labelError.setText("ФИО должно быть меньше 30 символов!");
+                    else if (phoneNewUser.getText().length() > 11)
+                        labelError.setText("Номер телефона не должен превышать 11 символов!");
+                    else if (emailNewUser.getText().length() > 30)
+                        labelError.setText("Эл. почта должна быть меньше 30 символов!");
+                    else if (loginNewUser.getText().length() > 10)
+                        labelError.setText("Логин должен содержать до 10 символов!");
                 }
             }
             else if (login.equals(""))

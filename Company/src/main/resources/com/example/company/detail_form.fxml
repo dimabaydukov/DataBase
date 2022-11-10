@@ -7,6 +7,7 @@
 <AnchorPane prefHeight="207.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.DetailFormController">
 
     <children>
+        <Label textFill="red" fx:id="labelError" layoutX="46.0" layoutY="20.0"/>
         <Group layoutX="46.0" layoutY="53.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Название" />

@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +20,7 @@ public class SignInFormController {
     public Button signInButton;
     public Button backButton;
     public Label labelError;
+    public static String currentUser = null;
 
     public void onSignInClick() throws SQLException, ClassNotFoundException {
         String login = loginUser.getText().trim();
@@ -35,12 +35,14 @@ public class SignInFormController {
             if (DataBaseHandler.connection == null)
                 labelError.setText("Данные введены неверно");
             else {
-                String role = dataBaseHandler.checkRole(login);
+                String role = DataBaseHandler.checkRole(login);
                 if (role != null){
                     if (role.equals("manager")) {
+                        currentUser = login;
                         goToManagerStartForm();
                     }
                     if (role.equals("tech_spec")) {
+                        currentUser = login;
                         goToTechSpecStartForm();
                     }
                 }

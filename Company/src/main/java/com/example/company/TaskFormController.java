@@ -26,6 +26,7 @@ public class TaskFormController implements Initializable {
     public Button saveButtonTask;
     public Button backButton;
     public TextArea descriptionTask;
+    public Label labelError;
     ObservableList<Integer> priorityList = FXCollections.observableArrayList(1,2,3);
     ObservableList<Integer> contractList = FXCollections.observableArrayList();
     ObservableList<String> employeeList = FXCollections.observableArrayList();
@@ -57,6 +58,7 @@ public class TaskFormController implements Initializable {
     }
 
     public void saveBtnOnClick() throws SQLException {
+        labelError.setText("");
         String name = nameTask.getText().trim();
         String description = descriptionTask.getText().trim();
         Date dateCreate = Date.valueOf(LocalDate.now());
@@ -65,25 +67,35 @@ public class TaskFormController implements Initializable {
         boolean status = false;
         int idContract = contractTask.getValue();
         String employeeName = employeeTask.getValue();
+        String managerName = SignInFormController.currentUser;
 
-        if (taskModel == null)
-            DataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract, employeeName);
-        else {
-            taskModel.setName(name);
-            taskModel.setDescription(description);
-            taskModel.setDeadline(deadline);
-            taskModel.setPriority(priority);
-            taskModel.setContractId(idContract);
-            taskModel.setEmpName(employeeName);
-            if (dateEndTask.getValue() != null && !dateEndTask.getValue().toString().equals("")){
-                taskModel.setStatus(true);
-                taskModel.setDateEnd(Date.valueOf(dateEndTask.getValue()));
+
+        if (!name.equals("") && name.length() <= 30) {
+            if (taskModel == null)
+                DataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract,
+                        employeeName, managerName);
+            else {
+                taskModel.setName(name);
+                taskModel.setDescription(description);
+                taskModel.setDeadline(deadline);
+                taskModel.setPriority(priority);
+                taskModel.setContractId(idContract);
+                taskModel.setEmpName(employeeName);
+                if (dateEndTask.getValue() != null && !dateEndTask.getValue().toString().equals("")) {
+                    taskModel.setStatus(true);
+                    taskModel.setDateEnd(Date.valueOf(dateEndTask.getValue()));
+                }
+                DataBaseHandler.updateTask(taskModel);
             }
-            DataBaseHandler.updateTask(taskModel);
-        }
 
-        Stage stageThis = (Stage) saveButtonTask.getScene().getWindow();
-        stageThis.close();
+            Stage stageThis = (Stage) saveButtonTask.getScene().getWindow();
+            stageThis.close();
+        }
+        else if (name.equals(""))
+            labelError.setText("Название не может быть пустым!!!");
+        else if (name.length() > 30)
+            labelError.setText("Название не должно превышать 30 символов!");
+
     }
 
     public void setTaskInForm(TaskModel task){
@@ -103,5 +115,15 @@ public class TaskFormController implements Initializable {
         else
             status = "Выполнено";
         statusTask.setText(status);
+    }
+
+    public void setUnAvailable(){
+        nameTask.setEditable(false);
+        dateDeadlineTask.setEditable(false);
+        dateDeadlineTask.setDisable(true);
+        priorityTask.setDisable(true);
+        contractTask.setDisable(true);
+        employeeTask.setDisable(true);
+        descriptionTask.setEditable(false);
     }
 }

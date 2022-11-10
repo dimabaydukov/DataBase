@@ -5,8 +5,8 @@
 
 <AnchorPane prefHeight="196.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TechSpecStartFormController">
     <children>
-        <Button fx:id="myTaskBtn" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" text="Мои задания" />
-        <Button fx:id="allDetailsBtn" layoutX="60.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="Просмотр всех деталей" />
-        <Button fx:id="addNewDetailBtn" layoutX="61.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" text="Добавление детали" />
+        <Button fx:id="myTaskBtn" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" onAction="#addNewTaskListForm" text="Мои задания" />
+        <Button fx:id="allDetailsBtn" layoutX="60.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" onAction="#addNewDetailListForm" text="Просмотр всех деталей" />
+        <Button fx:id="addNewDetailBtn" layoutX="61.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="174.0" onAction="#addNewDetailForm" text="Добавление детали" />
     </children>
 </AnchorPane>

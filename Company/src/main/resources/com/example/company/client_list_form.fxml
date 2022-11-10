@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="363.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ClientListFormController">
+   <children>
+      <TableView fx:id="listClients" layoutX="26.0" layoutY="24.0" prefHeight="312.0" prefWidth="151.0" />
+      <Label layoutX="223.0" layoutY="60.0" text="Имя" />
+      <Label layoutX="223.0" layoutY="103.0" text="Номер телефна" />
+      <Label layoutX="223.0" layoutY="147.0" text="Эл. почта" />
+      <Label layoutX="223.0" layoutY="190.0" text="Адрес" />
+      <Label layoutX="223.0" layoutY="235.0" text="Тип клиента" />
+      <Label fx:id="nameClient" layoutX="333.0" layoutY="59.0" text="*name*" />
+      <Label fx:id="phoneNumberClient" layoutX="333.0" layoutY="102.0" text="*phone number*" />
+      <Label fx:id="emailClient" layoutX="333.0" layoutY="146.0" text="*email*" />
+      <Label fx:id="addressClient" layoutX="333.0" layoutY="191.0" text="*address*" />
+      <Label fx:id="typeClient" layoutX="333.0" layoutY="234.0" text="*type*" />
+      <Button fx:id="deleteBtn" layoutX="402.0" layoutY="310.0" mnemonicParsing="false" onAction="#deleteOnClick" text="Удалить" />
+      <Button fx:id="editBtn" layoutX="470.0" layoutY="310.0" mnemonicParsing="false" onAction="#editOnClick" text="Редактировать" />
+   </children>
+</AnchorPane>

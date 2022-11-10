@@ -6,8 +6,8 @@
 <AnchorPane prefHeight="276.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ContractListFormController">
     <children>
         <TableView fx:id="listContracts" layoutX="17.0" layoutY="15.0" prefHeight="248.0" prefWidth="42.0" />
-        <Button fx:id="editBtn" layoutX="269.0" layoutY="238.0" mnemonicParsing="false" text="Редактировать" />
-        <Button fx:id="deleteBtn" layoutX="197.0" layoutY="238.0" mnemonicParsing="false" text="Удалить" />
+        <Button fx:id="editBtn" layoutX="269.0" layoutY="238.0" mnemonicParsing="false" onAction="#editOnClick" text="Редактировать" />
+        <Button fx:id="deleteBtn" layoutX="197.0" layoutY="238.0" mnemonicParsing="false" onAction="#deleteOnClick" text="Удалить" />
         <Label layoutX="84.0" layoutY="43.0" text="Описание" />
         <Label fx:id="descriptionLabel" layoutX="182.0" layoutY="43.0" minHeight="-Infinity" prefWidth="200.0" text="*description*" wrapText="true" />
         <Label layoutX="82.0" layoutY="117.0" text="Дата создания" />

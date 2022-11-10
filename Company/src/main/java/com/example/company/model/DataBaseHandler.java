@@ -25,8 +25,8 @@ public class DataBaseHandler extends Config {
         return connection;
     }
 
-    public boolean registering(String login, String password, String role,
-                               String phone, String email) throws SQLException, ClassNotFoundException {
+    public boolean registering(String name, String password, String role,
+                               String phone, String email, String login) throws SQLException, ClassNotFoundException {
         getDbConnection();
 
         Statement statement = null;
@@ -43,17 +43,18 @@ public class DataBaseHandler extends Config {
                 "PASSWORD \'" + password + "\';\n" +
                 "GRANT " + role + " TO " + login;
 
-        String queryEmployee = "INSERT INTO public.\"Employee\" (name_employee, phone_number_employee, email_employee, title) " +
-                "VALUES (?, ?, ?, ?)";
+        String queryEmployee = "INSERT INTO public.\"Employee\" (name_employee, phone_number_employee, email_employee, " +
+                "title, login_employee) " +
+                "VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(queryEmployee);
-        preparedStatement.setString(1, login);
+        preparedStatement.setString(1, name);
         preparedStatement.setString(2, phone);
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, role);
+        preparedStatement.setString(5, login);
 
         try {
             statement.executeUpdate(queryUser);
-            //проверить успешно ли выполнился запрос
             preparedStatement.executeUpdate();
             statement.close();
             preparedStatement.close();
@@ -65,7 +66,7 @@ public class DataBaseHandler extends Config {
         }
     }
 
-    public String checkRole(String login) throws SQLException {
+    public static String checkRole(String login) throws SQLException {
         String query = "SELECT title FROM public.\"Employee\" WHERE name_employee = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, login);
@@ -79,7 +80,7 @@ public class DataBaseHandler extends Config {
         return null;
     }
 
-    public void addDetail(String name, String serialNumber) throws SQLException {
+    public static void addDetail(String name, String serialNumber) throws SQLException {
         String queryAddDetail = "INSERT INTO public.\"Detail\" (name_detail, serial_number) " +
                 "VALUES (?, ?)";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddDetail);
@@ -89,7 +90,18 @@ public class DataBaseHandler extends Config {
         preparedStatement.close();
     }
 
-    public void addClient(String name, String phoneNumber, String email, String addressCl, String type) throws SQLException {
+    public static void updateDetail(DetailModel detailModel) throws SQLException {
+        String queryAddContract = "UPDATE public.\"Detail\" SET name_detail = ?, serial_number = ? " +
+                "WHERE id_detail = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddContract);
+        preparedStatement.setString(1, detailModel.getName());
+        preparedStatement.setString(2, detailModel.getSerialNumber());
+        preparedStatement.setInt(3, detailModel.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void addClient(String name, String phoneNumber, String email, String addressCl, String type) throws SQLException {
         String queryAddClient = "INSERT INTO public.\"Client\" (name_client, phone_number_client, email_client, " +
                 "address, client_type) " +
                 "VALUES (?, ?, ?, ?, ?)";
@@ -99,6 +111,19 @@ public class DataBaseHandler extends Config {
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, addressCl);
         preparedStatement.setString(5, type);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void updateClient(ClientModel clientModel) throws SQLException {
+        String queryAddContract = "UPDATE public.\"Client\" SET name_client = ?, phone_number_client = ?," +
+                "email_client = ?, address = ? WHERE id_client = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddContract);
+        preparedStatement.setString(1, clientModel.getName());
+        preparedStatement.setString(2, clientModel.getPhoneNumber());
+        preparedStatement.setString(3, clientModel.getEmail());
+        preparedStatement.setString(4, clientModel.getAddress());
+        preparedStatement.setInt(4, clientModel.getId());
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -182,6 +207,19 @@ public class DataBaseHandler extends Config {
         return list;
     }
 
+    public static String selectClientsNameFromContract(int id) throws SQLException {
+        String query = "SELECT name_client FROM public.\"Client\" WHERE id_client = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        String name = null;
+        while(resultSet.next()){
+            name = resultSet.getString("name_client");
+        }
+        preparedStatement.close();
+        return name;
+    }
+
     public static List<ClientModel> selectAllClients() throws SQLException {
         String query = "SELECT * FROM public.\"Client\"";
         Statement statement = DataBaseHandler.connection.createStatement();
@@ -202,7 +240,7 @@ public class DataBaseHandler extends Config {
     }
 
     public static List<DetailModel> selectAllDetails() throws SQLException {
-        String query = "SELECT * FROM public.\"Client\"";
+        String query = "SELECT * FROM public.\"Detail\"";
         Statement statement = DataBaseHandler.connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         List<DetailModel> list = new ArrayList<>();
@@ -217,8 +255,8 @@ public class DataBaseHandler extends Config {
         return list;
     }
 
-    public void addContract(String description, Date date, int idClient) throws SQLException {
-        String queryAddContract = "INSERT INTO public.\"Contract\" (description_conract, date_conract, id_client) " +
+    public static void addContract(String description, Date date, int idClient) throws SQLException {
+        String queryAddContract = "INSERT INTO public.\"Contract\" (description_contract, date_contract, id_client) " +
                 "VALUES (?, ?, ?)";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddContract);
         preparedStatement.setString(1, description);
@@ -230,7 +268,18 @@ public class DataBaseHandler extends Config {
         changeTypeClient(idClient);
     }
 
-    private void changeTypeClient(int id) throws SQLException {
+    public static void updateContract(ContractModel contractModel) throws SQLException {
+        String queryAddContract = "UPDATE public.\"Contract\" SET description_contract = ?, id_client = ? " +
+                "WHERE id_contract = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddContract);
+        preparedStatement.setString(1, contractModel.getDescription());
+        preparedStatement.setInt(2, contractModel.getClientId());
+        preparedStatement.setInt(3, contractModel.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    private static void changeTypeClient(int id) throws SQLException {
         String query = "UPDATE public.\"Client\" SET client_type = \'Текущий\' WHERE id_client = ?";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -239,10 +288,10 @@ public class DataBaseHandler extends Config {
     }
 
     public static void addTask(String name, String description, Date dateCreate, Date deadline, String priority, boolean status,
-                        int idContract, String employeeName) throws SQLException {
+                        int idContract, String employeeName, String managerName) throws SQLException {
         String queryAddTask = "INSERT INTO public.\"Task\" (name_task, description_task, date_create, date_deadline, " +
-                "priority, status, contract_id, emp_name) " +
-                "VALUES (?,?,?,?,?,?,?,?)";
+                "priority, status, contract_id, emp_name, manager_name) " +
+                "VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, description);
@@ -252,6 +301,7 @@ public class DataBaseHandler extends Config {
         preparedStatement.setBoolean(6, status);
         preparedStatement.setInt(7, idContract);
         preparedStatement.setString(8, employeeName);
+        preparedStatement.setString(9, managerName);
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
@@ -274,6 +324,16 @@ public class DataBaseHandler extends Config {
         preparedStatement.close();
     }
 
+    public static void updateTask(Date dateEnd, int id) throws SQLException {
+        String queryAddTask = "UPDATE public.\"Task\" SET date_end = ? " +
+                "WHERE id_task = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setDate(1, dateEnd);
+        preparedStatement.setInt(2, id);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
     public static void deleteTask(TaskModel task) throws SQLException {
         String queryAddTask = "DELETE FROM public.\"Task\" WHERE id_task = ?";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
@@ -286,6 +346,22 @@ public class DataBaseHandler extends Config {
         String queryAddTask = "DELETE FROM public.\"Contract\" WHERE id_contract = ?";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
         preparedStatement.setInt(1, contract.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void deleteClient(ClientModel client) throws SQLException {
+        String queryAddTask = "DELETE FROM public.\"Client\" WHERE id_client = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setInt(1, client.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void deleteDetail(DetailModel detail) throws SQLException {
+        String queryAddTask = "DELETE FROM public.\"Detail\" WHERE id_detail = ?";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(queryAddTask);
+        preparedStatement.setInt(1, detail.getId());
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }

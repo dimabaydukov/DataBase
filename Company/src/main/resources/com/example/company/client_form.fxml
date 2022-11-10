@@ -6,17 +6,18 @@
 
 <AnchorPane prefHeight="308.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ClientFormController">
 
+    <Label fx:id="labelError" layoutX="46.0" layoutY="20.0" textFill="red"/>
     <children>
         <Group layoutX="46.0" layoutY="53.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Имя клиента" />
-                <TextField fx:id="nameClient" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+                <TextField fx:id="nameClient" layoutX="89.0" layoutY="-4.0" prefHeight="26.0" prefWidth="401.0" />
             </children>
         </Group>
         <Group layoutX="46.0" layoutY="98.0">
             <children>
-                <Label prefHeight="18.0" prefWidth="73.0" text="Номер телефона" />
-                <TextField fx:id="phoneNumberClient" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+                <Label prefHeight="18.0" prefWidth="100.0" text="Номер телефона" />
+                <TextField fx:id="phoneNumberClient" layoutX="113.0" layoutY="-4.0" prefHeight="26.0" prefWidth="378.0" />
             </children>
         </Group>
         <Group layoutX="46.0" layoutY="143.0">

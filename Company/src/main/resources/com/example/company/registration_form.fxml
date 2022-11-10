@@ -15,13 +15,19 @@
             <TextField fx:id="loginNewUser" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
          </children>
       </Group>
-      <Group layoutX="46.0" layoutY="233.0">
+      <Group layoutX="46.0" layoutY="98.0">
+         <children>
+            <Label prefHeight="18.0" prefWidth="73.0" text="ФИО" />
+            <TextField fx:id="nameNewUser" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
+         </children>
+      </Group>
+      <Group layoutX="46.0" layoutY="278.0">
          <children>
             <Label prefHeight="18.0" prefWidth="73.0" text="Пароль" />
             <TextField fx:id="passwordNewUser" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
          </children>
       </Group>
-      <Group layoutX="46.0" layoutY="98.0">
+      <Group layoutX="46.0" layoutY="143.0">
          <children>
             <Label prefHeight="18.0" prefWidth="73.0" text="Роль" />
             <ChoiceBox fx:id="choiceRole" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0">
@@ -34,19 +40,19 @@
             </ChoiceBox>
          </children>
       </Group>
-      <Group layoutX="46.0" layoutY="143.0">
+      <Group layoutX="46.0" layoutY="188.0">
          <children>
             <Label prefHeight="18.0" prefWidth="101.0" text="Номер телефона" />
             <TextField fx:id="phoneNewUser" layoutX="137.0" layoutY="-4.0" prefHeight="26.0" prefWidth="353.0" />
          </children>
       </Group>
-      <Group layoutX="46.0" layoutY="188.0">
+      <Group layoutX="46.0" layoutY="233.0">
          <children>
             <Label prefHeight="18.0" prefWidth="73.0" text="Эл. почта" />
             <TextField fx:id="emailNewUser" layoutX="73.0" layoutY="-4.0" prefHeight="26.0" prefWidth="417.0" />
          </children>
       </Group>
-      <Button fx:id="registrationButton" layoutX="236.0" layoutY="304.0" mnemonicParsing="false" onAction="#onRegistrationClick" text="Зарегистрироваться" />
+      <Button fx:id="registrationButton" layoutX="236.0" layoutY="325.0" mnemonicParsing="false" onAction="#onRegistrationClick" text="Зарегистрироваться" />
       <Button fx:id="backButton" layoutX="550.0" layoutY="352.0" mnemonicParsing="false" onAction="#onBackClick" prefHeight="20.0" prefWidth="36.0" text="Назад">
          <font>
             <Font size="8.0" />
