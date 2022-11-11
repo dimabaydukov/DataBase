@@ -67,7 +67,7 @@ public class DataBaseHandler extends Config {
     }
 
     public static String checkRole(String login) throws SQLException {
-        String query = "SELECT title FROM public.\"Employee\" WHERE name_employee = ?";
+        String query = "SELECT title FROM public.\"Employee\" WHERE login_employee = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, login);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -154,13 +154,13 @@ public class DataBaseHandler extends Config {
         return listIdContracts;
     }
 
-    public static List<String> selectEmployeeNames() throws SQLException {
-        String query = "SELECT name_employee FROM public.\"Employee\"";
+    public static List<String> selectEmployeeLogins() throws SQLException {
+        String query = "SELECT login_employee FROM public.\"Employee\"";
         Statement statement = DataBaseHandler.connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         List<String> listEmployeeNames = new ArrayList<>();
         while(resultSet.next()){
-            String name = resultSet.getString("name_employee");
+            String name = resultSet.getString("login_employee");
             listEmployeeNames.add(name);
         }
         statement.close();
@@ -184,6 +184,7 @@ public class DataBaseHandler extends Config {
             task.setDateEnd(resultSet.getDate("date_end"));
             task.setContractId(resultSet.getInt("contract_id"));
             task.setEmpName(resultSet.getString("emp_name"));
+            task.setManager(resultSet.getString("manager_name"));
             list.add(task);
         }
         statement.close();

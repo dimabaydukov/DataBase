@@ -49,7 +49,6 @@ public class RegistrationFormController {
                 else {
                     if (name.length() <= 30 && phone.length() <= 11
                             && email.length() <= 30 && login.length() <= 10) {
-                        System.out.println(login.length());
                         DataBaseHandler dataBaseHandler = new DataBaseHandler();
                         boolean flag = dataBaseHandler.registering(name, pass, role, phone, email, login);
                         if (flag) {

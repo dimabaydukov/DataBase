@@ -13,6 +13,15 @@ public class TaskModel {
     private boolean status;
     private int contractId;
     private String empName;
+    private String manager;
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
 
     public TaskModel() {
     }

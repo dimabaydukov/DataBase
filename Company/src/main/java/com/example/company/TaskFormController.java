@@ -50,7 +50,7 @@ public class TaskFormController implements Initializable {
 
         employeeTask.getItems().setAll(employeeList);
         try {
-            employeeList.setAll(DataBaseHandler.selectEmployeeNames());
+            employeeList.setAll(DataBaseHandler.selectEmployeeLogins());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

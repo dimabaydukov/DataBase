@@ -35,6 +35,7 @@ public class TaskListFormController implements Initializable {
     public Label statusLabel;
     public Label dateEndLabel;
     public static boolean techSpec = false;
+    public Label managerLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,6 +86,7 @@ public class TaskListFormController implements Initializable {
                 st = "Завершено";
             }
             statusLabel.setText(st);
+            managerLabel.setText(task.getManager());
         }
         else{
             nameLabel.setText(null);
@@ -96,6 +98,7 @@ public class TaskListFormController implements Initializable {
             contractLabel.setText(null);
             employeeLabel.setText(null);
             statusLabel.setText(null);
+            managerLabel.setText(null);
         }
     }
 
