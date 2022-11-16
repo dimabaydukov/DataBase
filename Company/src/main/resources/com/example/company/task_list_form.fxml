@@ -3,11 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="501.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskListFormController">
+<AnchorPane prefHeight="537.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskListFormController">
    <children>
       <TableView fx:id="listTasks" layoutX="17.0" layoutY="15.0" prefHeight="468.0" prefWidth="172.0" />
-      <Button fx:id="editBtn" layoutX="472.0" layoutY="457.0" mnemonicParsing="false" onAction="#editOnClick" text="Редактировать" />
-      <Button fx:id="deleteBtn" layoutX="400.0" layoutY="457.0" mnemonicParsing="false" onAction="#deleteOnClick" text="Удалить" />
+      <Button fx:id="editBtn" layoutX="439.0" layoutY="454.0" mnemonicParsing="false" onAction="#editOnClick" prefHeight="26.0" prefWidth="145.0" text="Редактировать задание" />
+      <Button fx:id="deleteBtn" layoutX="439.0" layoutY="486.0" mnemonicParsing="false" onAction="#deleteOnClick" prefHeight="26.0" prefWidth="145.0" text="Удалить задание" />
       <Label layoutX="211.0" layoutY="34.0" text="Название" />
       <Label fx:id="nameLabel" layoutX="371.0" layoutY="34.0" text="*name*" />
       <Label layoutX="211.0" layoutY="69.0" text="Описание" />
@@ -28,5 +28,7 @@
       <Label fx:id="dateEndLabel" layoutX="369.0" layoutY="407.0" text="*date end*" />
       <Label layoutX="209.0" layoutY="298.0" text="Менеджер" />
       <Label fx:id="managerLabel" layoutX="369.0" layoutY="298.0" text="*manager*" />
+      <Button fx:id="addDetailInTaskBtn" layoutX="227.0" layoutY="454.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" onAction="#addDetailInTask" text="Добавить детали к заданию" />
+      <Button fx:id="tasksDetailsBtn" layoutX="227.0" layoutY="486.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" onAction="#tasksDetails" text="Посмотреть детали к заданию" />
    </children>
 </AnchorPane>
