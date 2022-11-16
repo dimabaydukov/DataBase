@@ -8,10 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -30,10 +27,13 @@ public class ClientListFormController implements Initializable {
     public Button deleteBtn;
     public Button editBtn;
     public TableView<ClientModel> listClients;
+    public TextField searchTF;
+    public Button searchBtn;
+    public Button allClientsBtn;
+    ObservableList<ClientModel> clients = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<ClientModel> clients = FXCollections.observableArrayList();
         try {
             clients.setAll(DataBaseHandler.selectAllClients());
         } catch (SQLException e) {
@@ -99,6 +99,25 @@ public class ClientListFormController implements Initializable {
             clientFormController.setClientModel(selectedItem);
             clientFormController.setClientInForm(selectedItem);
             stage.show();
+        }
+    }
+
+    public void searchClients(){
+        String query = searchTF.getText().toString().trim();
+        clients.clear();
+        try {
+            clients.setAll(DataBaseHandler.selectSearchClients(query));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void allClients(){
+        clients.clear();
+        try {
+            clients.setAll(DataBaseHandler.selectAllClients());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -240,6 +240,28 @@ public class DataBaseHandler extends Config {
         return list;
     }
 
+    public static List<ClientModel> selectSearchClients(String search) throws SQLException {
+        String query = "SELECT * FROM \"Client\" WHERE name_client LIKE \'%"+ search +"%\' " +
+                "OR address LIKE \'%"+ search +"%\'\n" +
+                "OR email_client LIKE \'%"+ search +"%\' OR client_type LIKE \'%"+ search +"%\' " +
+                "OR phone_number_client LIKE \'%"+ search +"%\'";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        List<ClientModel> list = new ArrayList<>();
+        while(resultSet.next()){
+            ClientModel client = new ClientModel();
+            client.setId(resultSet.getInt("id_client"));
+            client.setName(resultSet.getString("name_client"));
+            client.setPhoneNumber(resultSet.getString("phone_number_client"));
+            client.setEmail(resultSet.getString("email_client"));
+            client.setAddress(resultSet.getString("address"));
+            client.setType(resultSet.getString("client_type"));
+            list.add(client);
+        }
+        statement.close();
+        return list;
+    }
+
     public static List<DetailModel> selectAllDetails() throws SQLException {
         String query = "SELECT * FROM public.\"Detail\"";
         Statement statement = DataBaseHandler.connection.createStatement();
