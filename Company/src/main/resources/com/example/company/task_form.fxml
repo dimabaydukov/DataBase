@@ -62,7 +62,7 @@
             </children>
         </Group>
       <Button fx:id="saveButtonTask" layoutX="398.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
-      <Button fx:id="backButton" layoutX="489.0" layoutY="398.0" mnemonicParsing="false" text="Назад" />
+      <Button fx:id="backButton" layoutX="489.0" layoutY="398.0" mnemonicParsing="false" onAction="#onBackClick" text="Назад" />
       <Label fx:id="labelError" layoutX="46.0" layoutY="20.0" textFill="red" />
     </children>
 

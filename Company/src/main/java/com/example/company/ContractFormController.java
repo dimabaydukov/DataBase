@@ -61,4 +61,9 @@ public class ContractFormController implements Initializable {
         dateContract.setText(contract.getDateCreate().toString());
         clientIdContract.setValue(contract.getClientId());
     }
+
+    public void onBackClick(){
+        Stage stageThis = (Stage) backButton.getScene().getWindow();
+        stageThis.close();
+    }
 }

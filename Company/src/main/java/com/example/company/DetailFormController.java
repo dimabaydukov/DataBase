@@ -50,4 +50,9 @@ public class DetailFormController {
         nameDetail.setText(detail.getName());
         serialNumberDetail.setText(detail.getSerialNumber());
     }
+
+    public void onBackClick(){
+        Stage stageThis = (Stage) backButton.getScene().getWindow();
+        stageThis.close();
+    }
 }

@@ -63,4 +63,9 @@ public class ClientFormController {
         emailClient.setText(client.getEmail());
         addressClient.setText(client.getAddress());
     }
+
+    public void onBackClick(){
+        Stage stageThis = (Stage) backButton.getScene().getWindow();
+        stageThis.close();
+    }
 }

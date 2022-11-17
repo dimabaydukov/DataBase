@@ -455,4 +455,30 @@ public class DataBaseHandler extends Config {
         preparedStatement.executeUpdate();
         preparedStatement.close();
     }
+
+    public static boolean createReportTask() throws SQLException {
+        String query = "COPY \"Task\"(name_task, description_task, date_create, date_deadline, priority, date_end, status)\n" +
+                "TO \'D:\\Git\\DataBase\\saveTask.json\'\n" +
+                "DELIMITER \',\' CSV HEADER;";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        if (statement.execute(query)){
+            statement.close();
+            return true;
+        }
+        statement.close();
+        return false;
+    }
+
+    public static boolean createReportEmployee() throws SQLException {
+        String query = "COPY \"Employee\" (name_employee, phone_number_employee, email_employee, title, login_employee) \n" +
+                "TO \'D:\\Git\\DataBase\\saveEmployee.json\'\n" +
+                "DELIMITER \',\' CSV HEADER;";
+        Statement statement = DataBaseHandler.connection.createStatement();
+        if (statement.execute(query)){
+            statement.close();
+            return true;
+        }
+        statement.close();
+        return false;
+    }
 }
