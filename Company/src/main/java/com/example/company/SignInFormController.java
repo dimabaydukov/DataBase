@@ -49,9 +49,9 @@ public class SignInFormController {
             }
         }
         else if (login.equals(""))
-            loginUser.setText("Введите логин!!!");
+            labelError.setText("Введите логин!!!");
         else
-            passwordUser.setText("Введите пароль!!!");
+            labelError.setText("Введите пароль!!!");
     }
 
     public void onBackClick() {
