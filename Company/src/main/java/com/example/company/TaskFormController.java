@@ -126,4 +126,9 @@ public class TaskFormController implements Initializable {
         employeeTask.setDisable(true);
         descriptionTask.setEditable(false);
     }
+
+    public void onBackClick(){
+        Stage stageThis = (Stage) backButton.getScene().getWindow();
+        stageThis.close();
+    }
 }

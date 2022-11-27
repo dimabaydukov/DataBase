@@ -21,7 +21,7 @@
             </children>
         </Group>
         <Button fx:id="saveButtonDetail" layoutX="252.0" layoutY="141.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
-        <Button fx:id="backButton" layoutX="522.0" layoutY="167.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" text="Назад" />
+        <Button fx:id="backButton" layoutX="522.0" layoutY="167.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" onAction="#onBackClick" text="Назад" />
     </children>
 
 </AnchorPane>

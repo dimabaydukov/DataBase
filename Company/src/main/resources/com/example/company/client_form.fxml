@@ -33,7 +33,7 @@
             </children>
         </Group>
         <Button fx:id="saveButtonClient" layoutX="432.0" layoutY="249.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
-        <Button fx:id="backButton" layoutX="520.0" layoutY="249.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" text="Назад" />
+        <Button fx:id="backButton" layoutX="520.0" layoutY="249.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" onAction="#onBackClick" text="Назад" />
     </children>
 
 </AnchorPane>

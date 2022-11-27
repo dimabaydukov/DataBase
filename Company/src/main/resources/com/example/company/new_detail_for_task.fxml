@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="214.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.NewDetailForTaskController">
+    <children>
+        <Group layoutX="46.0" layoutY="45.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="73.0" text="ID детали" />
+                <ComboBox fx:id="idDetails" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+            </children>
+        </Group>
+      <Label layoutX="46.0" layoutY="83.0" text="Название" />
+      <Label fx:id="nameLabel" layoutX="188.0" layoutY="83.0" text="*name*" />
+      <Label layoutX="46.0" layoutY="119.0" text="Серийный номер" />
+      <Label fx:id="serialNumberLabel" layoutX="188.0" layoutY="119.0" text="*serial number*" />
+      <Button fx:id="addButton" layoutX="152.0" layoutY="160.0" mnemonicParsing="false" onAction="#saveDetailInTask"
+              text="Добавить" />
+    </children>
+
+</AnchorPane>

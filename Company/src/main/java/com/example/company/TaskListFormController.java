@@ -36,6 +36,13 @@ public class TaskListFormController implements Initializable {
     public Label dateEndLabel;
     public static boolean techSpec = false;
     public Label managerLabel;
+    public Button addDetailInTaskBtn;
+    public Button tasksDetailsBtn;
+    private static int idSelectedTask;
+
+    public static int getIdSelectedTask() {
+        return idSelectedTask;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -136,5 +143,49 @@ public class TaskListFormController implements Initializable {
 
     public void setUnVisible(){
         deleteBtn.setVisible(false);
+    }
+
+    public void addDetailInTask(){
+        try{
+            TaskModel selectedItem = listTasks.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                int taskId = selectedItem.getId();
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("new_detail_for_task.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setTitle("Add detail");
+                stage.setScene(scene);
+                NewDetailForTaskController newDetailForTaskController = fxmlLoader.getController();
+                newDetailForTaskController.setIdTask(taskId);
+                stage.show();
+            }
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public void tasksDetails(){
+        TaskModel selectedItem = listTasks.getSelectionModel().getSelectedItem();
+        if (selectedItem != null){
+            idSelectedTask = selectedItem.getId();
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("taskdetail_list_form.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Stage stage = new Stage();
+            stage.setTitle("Details for the task");
+            stage.setScene(scene);
+            if (techSpec){
+                TaskdetailListFormController formController = fxmlLoader.getController();
+                formController.setUnVisible();
+            }
+            stage.show();
+        }
     }
 }

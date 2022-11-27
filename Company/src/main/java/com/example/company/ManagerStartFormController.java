@@ -1,15 +1,23 @@
 package com.example.company;
 
+import com.example.company.model.DataBaseHandler;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ManagerStartFormController {
+public class ManagerStartFormController implements Initializable {
     public Button addNewTaskBtn;
     public Button allTasksBtn;
     public Button addNewContractBtn;
@@ -18,6 +26,9 @@ public class ManagerStartFormController {
     public Button allClientsBtn;
     public Button addNewDetailBtn;
     public Button allDetailsBtn;
+    public Button reportEmployee;
+    public Button reportTask;
+    public AnchorPane anchorPane;
 
 
     public void addNewTaskForm(){
@@ -138,5 +149,30 @@ public class ManagerStartFormController {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
+    }
+
+    public void newReportEmployee() throws SQLException {
+        boolean flag = DataBaseHandler.createReportEmployee();
+        if (!flag)
+            reportEmployee.setStyle("-fx-text-fill: #14ad11");
+    }
+
+    public void newReportTask() throws SQLException {
+        boolean flag = DataBaseHandler.createReportTask();
+        if (!flag)
+            reportTask.setStyle("-fx-text-fill: #14ad11");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        anchorPane.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>(){
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        reportTask.setStyle("-fx-text-fill: rgba(0,0,0,0.86)");
+                        reportEmployee.setStyle("-fx-text-fill: rgba(0,0,0,0.86)");
+                    }
+                }
+        );
     }
 }
