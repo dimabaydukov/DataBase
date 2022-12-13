@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="196.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.DoctorStartFormController">
+    <children>
+        <Button fx:id="myTaskBtn" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="173.0" onAction="#addNewTaskListForm" text="Мои задания" />
+        <Button fx:id="allDetailsBtn" layoutX="60.0" layoutY="84.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" onAction="#addNewEquipmentListForm" text="Просмотр оборудования" />
+        <Button fx:id="addNewDetailBtn" layoutX="60.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" onAction="#addNewEquipmentForm" text="Добавление оборудования" />
+    </children>
+</AnchorPane>

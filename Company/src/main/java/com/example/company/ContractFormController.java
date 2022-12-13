@@ -21,6 +21,7 @@ public class ContractFormController implements Initializable {
     public ComboBox<Integer> clientIdContract;
     public Button backButton;
     public Button saveButtonContract;
+    public ComboBox<Integer> petIdContract;
     private ContractModel contractModel = null;
 
     public void setContractModel(ContractModel contractModel){
@@ -29,26 +30,37 @@ public class ContractFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Integer> items = FXCollections.observableArrayList();
-        clientIdContract.getItems().setAll(items);
+        ObservableList<Integer> itemsClient = FXCollections.observableArrayList();
+        clientIdContract.getItems().setAll(itemsClient);
         try {
-            items.setAll(DataBaseHandler.selectIdClients());
+            itemsClient.setAll(DataBaseHandler.selectIdClients());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        clientIdContract.setItems(items);
+        clientIdContract.setItems(itemsClient);
+
+        ObservableList<Integer> itemsPet = FXCollections.observableArrayList();
+        petIdContract.getItems().setAll(itemsPet);
+        try {
+            itemsPet.setAll(DataBaseHandler.selectIdPets());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        petIdContract.setItems(itemsPet);
     }
 
     public void saveBtnOnClick() throws SQLException {
         String description = descriptionContract.getText().trim();
         Date date = Date.valueOf(LocalDate.now());
         int idClient = clientIdContract.getValue();
+        int idPet = petIdContract.getValue();
 
         if (contractModel == null)
-            DataBaseHandler.addContract(description, date, idClient);
+            DataBaseHandler.addContract(description, date, idClient, idPet);
         else {
             contractModel.setDescription(description);
             contractModel.setClientId(idClient);
+            contractModel.setPetId(idPet);
             DataBaseHandler.updateContract(contractModel);
         }
 
@@ -60,6 +72,7 @@ public class ContractFormController implements Initializable {
         descriptionContract.setText(contract.getDescription());
         dateContract.setText(contract.getDateCreate().toString());
         clientIdContract.setValue(contract.getClientId());
+        petIdContract.setValue(contract.getPetId());
     }
 
     public void onBackClick(){

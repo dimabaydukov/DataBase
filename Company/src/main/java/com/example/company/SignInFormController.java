@@ -41,9 +41,9 @@ public class SignInFormController {
                         currentUser = login;
                         goToManagerStartForm();
                     }
-                    if (role.equals("tech_spec")) {
+                    if (role.equals("doctor")) {
                         currentUser = login;
-                        goToTechSpecStartForm();
+                        goToDoctorStartForm();
                     }
                 }
             }
@@ -90,10 +90,10 @@ public class SignInFormController {
         }
     }
 
-    private void goToTechSpecStartForm(){
+    private void goToDoctorStartForm(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("tech_spec_start_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("doctor_start_form.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Menu");

@@ -62,25 +62,35 @@ public class TaskFormController implements Initializable {
         String name = nameTask.getText().trim();
         String description = descriptionTask.getText().trim();
         Date dateCreate = Date.valueOf(LocalDate.now());
-        Date deadline = Date.valueOf(dateDeadlineTask.getValue());
+        Date deadline = null;
+        if (dateDeadlineTask.getValue() != null)
+            deadline = Date.valueOf(dateDeadlineTask.getValue());
+        Date dateEnd = null;
+        if (dateEndTask.getValue() != null)
+            dateEnd = Date.valueOf(dateEndTask.getValue());
         String priority = priorityTask.getValue().toString();
         boolean status = false;
         int idContract = contractTask.getValue();
         String employeeName = employeeTask.getValue();
         String managerName = SignInFormController.currentUser;
 
-
         if (!name.equals("") && name.length() <= 30) {
-            if (taskModel == null)
+            if (taskModel == null) {
                 DataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract,
-                        employeeName, managerName);
+                        employeeName, managerName, dateEnd);
+            }
             else {
                 taskModel.setName(name);
                 taskModel.setDescription(description);
                 taskModel.setDeadline(deadline);
                 taskModel.setPriority(priority);
                 taskModel.setContractId(idContract);
-                taskModel.setEmpName(employeeName);
+                if (!taskModel.getEmpName().equals(employeeName)){
+                    int newIdEmp = DataBaseHandler.selectCurrentEmployeeId(employeeName);
+                    int idEmp = DataBaseHandler.selectCurrentEmployeeId(taskModel.getEmpName());
+                    DataBaseHandler.updateEmployeeTask(idEmp, taskModel.getId(), newIdEmp);
+                    taskModel.setEmpName(employeeName);
+                }
                 if (dateEndTask.getValue() != null && !dateEndTask.getValue().toString().equals("")) {
                     taskModel.setStatus(true);
                     taskModel.setDateEnd(Date.valueOf(dateEndTask.getValue()));

@@ -37,8 +37,8 @@ public class RegistrationFormController {
 
         labelError.setText("");
         if (role != null && !role.equals("")) {
-            if (choiceRole.getValue().equals("Тех специалист"))
-                role = "tech_spec";
+            if (choiceRole.getValue().equals("Доктор"))
+                role = "doctor";
             else
                 role = "manager";
 

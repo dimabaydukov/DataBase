@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="252.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskEquipmentListFormController">
+    <children>
+        <TableView fx:id="listEquipments" layoutX="27.0" layoutY="28.0" prefHeight="194.0" prefWidth="110.0" />
+        <Label layoutX="157.0" layoutY="59.0" text="Название" />
+        <Label layoutX="157.0" layoutY="106.0" text="Код" />
+        <Label fx:id="nameLabel" layoutX="299.0" layoutY="59.0" text="*name*" />
+        <Label fx:id="vendorCodeLabel" layoutX="299.0" layoutY="106.0" text="*vendor code*" />
+        <Button fx:id="deleteBtn" layoutX="339.0" layoutY="196.0" mnemonicParsing="false" onAction="#deleteOnClick"
+                text="Удалить из задания" />
+    </children>
+</AnchorPane>

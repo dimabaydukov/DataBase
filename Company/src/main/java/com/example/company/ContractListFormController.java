@@ -28,6 +28,8 @@ public class ContractListFormController implements Initializable {
     public Label dateCreateLabel;
     public Label idClientLabel;
     public Label clientNameLabel;
+    public Label petNameLabel;
+    public Label kindOfAnimalLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,18 +58,26 @@ public class ContractListFormController implements Initializable {
             dateCreateLabel.setText(contract.getDateCreate().toString());
             idClientLabel.setText(String.valueOf(contract.getClientId()));
             String name = null;
+            String petName = null;
+            String kindOfAnimal = null;
             try {
                 name = DataBaseHandler.selectClientsNameFromContract(contract.getClientId());
+                petName = DataBaseHandler.selectPetsNameFromContract(contract.getPetId());
+                kindOfAnimal = DataBaseHandler.selectKindOfAnimalFromContract(contract.getPetId());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             clientNameLabel.setText(name);
+            petNameLabel.setText(petName);
+            kindOfAnimalLabel.setText(kindOfAnimal);
         }
         else {
             descriptionLabel.setText(null);
             dateCreateLabel.setText(null);
             idClientLabel.setText(null);
             clientNameLabel.setText(null);
+            petNameLabel.setText(null);
+            kindOfAnimalLabel.setText(null);
         }
     }
 

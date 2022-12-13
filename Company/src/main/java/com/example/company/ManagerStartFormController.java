@@ -24,11 +24,13 @@ public class ManagerStartFormController implements Initializable {
     public Button allContractsBtn;
     public Button addNewClientBtn;
     public Button allClientsBtn;
-    public Button addNewDetailBtn;
-    public Button allDetailsBtn;
+    public Button addNewEquipmentBtn;
+    public Button allEquipmentsBtn;
     public Button reportEmployee;
     public Button reportTask;
     public AnchorPane anchorPane;
+    public Button addNewPetBtn;
+    public Button allPetsBtn;
 
 
     public void addNewTaskForm(){
@@ -46,13 +48,13 @@ public class ManagerStartFormController implements Initializable {
         }
     }
 
-    public void addNewDetailForm(){
+    public void addNewEquipmentForm(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("detail_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("equipment_form.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setTitle("Detail");
+            stage.setTitle("Equipment");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -83,6 +85,21 @@ public class ManagerStartFormController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Contract");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public void addNewPetForm(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("pet_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Pet");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -136,13 +153,28 @@ public class ManagerStartFormController implements Initializable {
         }
     }
 
-    public void addNewDetailListForm(){
+    public void addNewEquipmentListForm(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("detail_list_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("equipment_list_form.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setTitle("Details");
+            stage.setTitle("Equipments");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public void addNewPetListForm(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("pet_list_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Pets");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

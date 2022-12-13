@@ -6,7 +6,6 @@ public class ClientModel {
     private String phoneNumber;
     private String email;
     private String address;
-    private String type;
 
     public int getId() {
         return id;
@@ -46,13 +45,5 @@ public class ClientModel {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

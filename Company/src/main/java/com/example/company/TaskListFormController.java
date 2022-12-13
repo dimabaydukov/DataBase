@@ -34,7 +34,7 @@ public class TaskListFormController implements Initializable {
     public Label contractLabel;
     public Label statusLabel;
     public Label dateEndLabel;
-    public static boolean techSpec = false;
+    public static boolean doctor = false;
     public Label managerLabel;
     public Button addDetailInTaskBtn;
     public Button tasksDetailsBtn;
@@ -114,6 +114,10 @@ public class TaskListFormController implements Initializable {
         if (selectedItem != null){
             listTasks.getItems().remove(selectedItem);
             DataBaseHandler.deleteTask(selectedItem);
+            int idEmp = DataBaseHandler.selectCurrentEmployeeId(selectedItem.getEmpName());
+            int idManager = DataBaseHandler.selectCurrentEmployeeId(selectedItem.getManager());
+            DataBaseHandler.deleteEmployeeTask(idEmp, selectedItem.getId());
+            DataBaseHandler.deleteEmployeeTask(idManager, selectedItem.getId());
         }
     }
 
@@ -130,7 +134,7 @@ public class TaskListFormController implements Initializable {
                 TaskFormController taskFormController = fxmlLoader.getController();
                 taskFormController.setTaskModel(selectedItem);
                 taskFormController.setTaskInForm(selectedItem);
-                if (techSpec){
+                if (doctor){
                     taskFormController.setUnAvailable();
                 }
                 stage.show();
@@ -151,13 +155,13 @@ public class TaskListFormController implements Initializable {
             if (selectedItem != null) {
                 int taskId = selectedItem.getId();
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("new_detail_for_task.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("new_equipment_for_task.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
-                stage.setTitle("Add detail");
+                stage.setTitle("Add equipment");
                 stage.setScene(scene);
-                NewDetailForTaskController newDetailForTaskController = fxmlLoader.getController();
-                newDetailForTaskController.setIdTask(taskId);
+                NewEquipmentForTaskController newEquipmentForTaskController = fxmlLoader.getController();
+                newEquipmentForTaskController.setIdTask(taskId);
                 stage.show();
             }
         } catch (IOException e) {
@@ -171,7 +175,7 @@ public class TaskListFormController implements Initializable {
         if (selectedItem != null){
             idSelectedTask = selectedItem.getId();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("taskdetail_list_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("taskequipment_list_form.fxml"));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load());
@@ -179,10 +183,10 @@ public class TaskListFormController implements Initializable {
                 throw new RuntimeException(e);
             }
             Stage stage = new Stage();
-            stage.setTitle("Details for the task");
+            stage.setTitle("Equipments for the task");
             stage.setScene(scene);
-            if (techSpec){
-                TaskdetailListFormController formController = fxmlLoader.getController();
+            if (doctor){
+                TaskEquipmentListFormController formController = fxmlLoader.getController();
                 formController.setUnVisible();
             }
             stage.show();

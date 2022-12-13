@@ -3,17 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="459.0" prefWidth="296.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ManagerStartFormController">
+<AnchorPane fx:id="anchorPane" prefHeight="353.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ManagerStartFormController">
    <children>
       <Button fx:id="addNewTaskBtn" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" onAction="#addNewTaskForm" prefHeight="26.0" prefWidth="174.0" text="Добавление нового задания" />
-      <Button fx:id="allTasksBtn" layoutX="61.0" layoutY="84.0" mnemonicParsing="false" onAction="#addNewTaskListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех заданий" />
-      <Button fx:id="addNewContractBtn" layoutX="60.0" layoutY="124.0" mnemonicParsing="false" onAction="#addNewContractForm" prefHeight="26.0" prefWidth="174.0" text="Добавление контракта" />
-      <Button fx:id="allContractsBtn" layoutX="60.0" layoutY="164.0" mnemonicParsing="false" onAction="#addNewContractListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех контрактов" />
-      <Button fx:id="addNewClientBtn" layoutX="61.0" layoutY="203.0" mnemonicParsing="false" onAction="#addNewClientForm" prefHeight="26.0" prefWidth="174.0" text="Добавление нового клиента" />
-      <Button fx:id="allClientsBtn" layoutX="61.0" layoutY="241.0" mnemonicParsing="false" onAction="#addNewClientListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех клиентов" />
-      <Button fx:id="addNewDetailBtn" layoutX="60.0" layoutY="280.0" mnemonicParsing="false" onAction="#addNewDetailForm" prefHeight="26.0" prefWidth="174.0" text="Добавление детали" />
-      <Button fx:id="allDetailsBtn" layoutX="60.0" layoutY="319.0" mnemonicParsing="false" onAction="#addNewDetailListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр деталей" />
-      <Button fx:id="reportEmployee" layoutX="50.0" layoutY="357.0" mnemonicParsing="false" onAction="#newReportEmployee" text="Составить отчет по сотрудникам" />
-      <Button fx:id="reportTask" layoutX="58.0" layoutY="395.0" mnemonicParsing="false" onAction="#newReportTask" text="Составить отчет по заданиям" />
+      <Button fx:id="allTasksBtn" layoutX="277.0" layoutY="45.0" mnemonicParsing="false" onAction="#addNewTaskListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех заданий" />
+      <Button fx:id="addNewContractBtn" layoutX="61.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewContractForm" prefHeight="26.0" prefWidth="174.0" text="Добавление контракта" />
+      <Button fx:id="allContractsBtn" layoutX="277.0" layoutY="85.0" mnemonicParsing="false" onAction="#addNewContractListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех контрактов" />
+      <Button fx:id="addNewClientBtn" layoutX="61.0" layoutY="125.0" mnemonicParsing="false" onAction="#addNewClientForm" prefHeight="26.0" prefWidth="174.0" text="Добавление нового клиента" />
+      <Button fx:id="allClientsBtn" layoutX="277.0" layoutY="125.0" mnemonicParsing="false" onAction="#addNewClientListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех клиентов" />
+      <Button fx:id="addNewEquipmentBtn" layoutX="60.0" layoutY="165.0" mnemonicParsing="false" onAction="#addNewEquipmentForm" prefHeight="26.0" prefWidth="174.0" text="Добавление оборудования" />
+      <Button fx:id="allEquipmentsBtn" layoutX="277.0" layoutY="165.0" mnemonicParsing="false" onAction="#addNewEquipmentListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр оборудования" />
+      <Button fx:id="reportEmployee" layoutX="158.0" layoutY="253.0" mnemonicParsing="false" onAction="#newReportEmployee" text="Составить отчет по сотрудникам" />
+      <Button fx:id="reportTask" layoutX="167.0" layoutY="290.0" mnemonicParsing="false" onAction="#newReportTask" text="Составить отчет по заданиям" />
+      <Button fx:id="addNewPetBtn" layoutX="61.0" layoutY="205.0" mnemonicParsing="false" onAction="#addNewPetForm" prefHeight="26.0" prefWidth="174.0" text="Добавление питомца" />
+      <Button fx:id="allPetsBtn" layoutX="277.0" layoutY="205.0" mnemonicParsing="false" onAction="#addNewPetListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех питомцев" />
    </children>
 </AnchorPane>

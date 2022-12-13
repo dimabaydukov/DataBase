@@ -1,8 +1,7 @@
 package com.example.company;
 
-import com.example.company.model.ClientModel;
 import com.example.company.model.DataBaseHandler;
-import com.example.company.model.DetailModel;
+import com.example.company.model.EquipmentModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -17,62 +16,65 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class DetailListFormController implements Initializable {
-    public TableView<DetailModel> listDetails;
+public class EquipmentListFormController implements Initializable {
+    public TableView<EquipmentModel> listDetails;
     public Label nameLabel;
-    public Label serialNumberLabel;
+    public Label vendorCodeLabel;
     public Button editBtn;
     public Button deleteBtn;
+    public Label typeLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<DetailModel> details = FXCollections.observableArrayList();
+        ObservableList<EquipmentModel> equipments = FXCollections.observableArrayList();
         try {
-            details.addAll(DataBaseHandler.selectAllDetails());
+            equipments.addAll(DataBaseHandler.selectAllEquipments());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        listDetails.setItems(details);
+        listDetails.setItems(equipments);
 
-        TableColumn<DetailModel, Integer> idColumn = new TableColumn<>("ID");
-        idColumn.setCellValueFactory(new PropertyValueFactory<DetailModel, Integer>("id"));
+        TableColumn<EquipmentModel, Integer> idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(new PropertyValueFactory<EquipmentModel, Integer>("id"));
         listDetails.getColumns().add(idColumn);
 
-        TableColumn<DetailModel, String> nameColumn = new TableColumn<>("Имя");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<DetailModel, String>("name"));
+        TableColumn<EquipmentModel, String> nameColumn = new TableColumn<>("Имя");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<EquipmentModel, String>("name"));
         listDetails.getColumns().add(nameColumn);
 
-        showDetailDetails(null);
+        showEquipmentDetails(null);
 
         listDetails.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showDetailDetails(newValue)
+                (observable, oldValue, newValue) -> showEquipmentDetails(newValue)
         );
     }
 
-    private void showDetailDetails(DetailModel detail) {
+    private void showEquipmentDetails(EquipmentModel detail) {
         if (detail != null) {
             nameLabel.setText(detail.getName());
-            serialNumberLabel.setText(detail.getSerialNumber());
+            vendorCodeLabel.setText(String.valueOf(detail.getVendorCode()));
+            typeLabel.setText(detail.getType());
         }
         else {
             nameLabel.setText(null);
-            serialNumberLabel.setText(null);
+            vendorCodeLabel.setText(null);
+            typeLabel.setText(null);
         }
     }
 
     public void deleteOnClick() throws SQLException {
-        DetailModel selectedItem = listDetails.getSelectionModel().getSelectedItem();
+        EquipmentModel selectedItem = listDetails.getSelectionModel().getSelectedItem();
         if (selectedItem != null){
             listDetails.getItems().remove(selectedItem);
-            DataBaseHandler.deleteDetail(selectedItem);
+            DataBaseHandler.deleteEquipment(selectedItem);
         }
     }
 
     public void editOnClick(){
-        DetailModel selectedItem = listDetails.getSelectionModel().getSelectedItem();
+        EquipmentModel selectedItem = listDetails.getSelectionModel().getSelectedItem();
         if (selectedItem != null){
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("detail_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("equipment_form.fxml"));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load());
@@ -80,11 +82,11 @@ public class DetailListFormController implements Initializable {
                 throw new RuntimeException(e);
             }
             Stage stage = new Stage();
-            stage.setTitle("Detail");
+            stage.setTitle("Equipment");
             stage.setScene(scene);
-            DetailFormController detailFormController = fxmlLoader.getController();
-            detailFormController.setDetailModel(selectedItem);
-            detailFormController.setDetailInForm(selectedItem);
+            EquipmentFormController equipmentFormController = fxmlLoader.getController();
+            equipmentFormController.setDetailModel(selectedItem);
+            equipmentFormController.setDetailInForm(selectedItem);
             stage.show();
         }
     }

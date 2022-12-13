@@ -23,7 +23,6 @@ public class ClientListFormController implements Initializable {
     public Label phoneNumberClient;
     public Label emailClient;
     public Label addressClient;
-    public Label typeClient;
     public Button deleteBtn;
     public Button editBtn;
     public TableView<ClientModel> listClients;
@@ -62,14 +61,12 @@ public class ClientListFormController implements Initializable {
             phoneNumberClient.setText(client.getPhoneNumber());
             emailClient.setText(client.getEmail());
             addressClient.setText(client.getAddress());
-            typeClient.setText(client.getType());
         }
         else {
             nameClient.setText(null);
             phoneNumberClient.setText(null);
             emailClient.setText(null);
             addressClient.setText(null);
-            typeClient.setText(null);
         }
     }
 

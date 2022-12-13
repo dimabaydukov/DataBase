@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TechSpecStartFormController {
+public class DoctorStartFormController {
     public Button myTaskBtn;
     public Button allDetailsBtn;
     public Button addNewDetailBtn;
@@ -23,7 +23,7 @@ public class TechSpecStartFormController {
             stage.setTitle("Tasks");
             stage.setScene(scene);
             TaskListFormController taskListFormController = fxmlLoader.getController();
-            TaskListFormController.techSpec = true;
+            TaskListFormController.doctor = true;
             taskListFormController.setUnVisible();
             stage.show();
         } catch (IOException e) {
@@ -32,13 +32,13 @@ public class TechSpecStartFormController {
         }
     }
 
-    public void addNewDetailForm(){
+    public void addNewEquipmentForm(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("detail_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("equipment_form.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setTitle("Detail");
+            stage.setTitle("Equipment");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -47,16 +47,16 @@ public class TechSpecStartFormController {
         }
     }
 
-    public void addNewDetailListForm(){
+    public void addNewEquipmentListForm(){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("detail_list_form.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("equipment_list_form.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
-            stage.setTitle("Details");
+            stage.setTitle("Equipments");
             stage.setScene(scene);
-            DetailListFormController detailListFormController = fxmlLoader.getController();
-            detailListFormController.setUnVisible();
+            EquipmentListFormController equipmentListFormController = fxmlLoader.getController();
+            equipmentListFormController.setUnVisible();
             stage.show();
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());

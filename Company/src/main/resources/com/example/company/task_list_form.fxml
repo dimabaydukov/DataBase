@@ -28,7 +28,7 @@
       <Label fx:id="dateEndLabel" layoutX="369.0" layoutY="407.0" text="*date end*" />
       <Label layoutX="209.0" layoutY="298.0" text="Менеджер" />
       <Label fx:id="managerLabel" layoutX="369.0" layoutY="298.0" text="*manager*" />
-      <Button fx:id="addDetailInTaskBtn" layoutX="227.0" layoutY="454.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" onAction="#addDetailInTask" text="Добавить детали к заданию" />
-      <Button fx:id="tasksDetailsBtn" layoutX="227.0" layoutY="486.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" onAction="#tasksDetails" text="Посмотреть детали к заданию" />
+      <Button fx:id="addDetailInTaskBtn" layoutX="227.0" layoutY="454.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" onAction="#addDetailInTask" text="Добавить оборудование к заданию" />
+      <Button fx:id="tasksDetailsBtn" layoutX="227.0" layoutY="486.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" onAction="#tasksDetails" text="Посмотреть оборудование к заданию" />
    </children>
 </AnchorPane>

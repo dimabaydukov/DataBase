@@ -28,12 +28,11 @@ public class ClientFormController {
         String phoneNumber = phoneNumberClient.getText().trim();
         String email = emailClient.getText().trim();
         String addressCl = addressClient.getText().trim();
-        String type = "Потенциальный";
 
         if (phoneNumber.length() <= 11 && email.length() <= 30 && addressCl.length() <= 50 && name.length() <= 30
-        && !phoneNumber.equals(null) && !nameClient.equals(null)) {
+        && !phoneNumber.equals("") && !nameClient.equals("")) {
             if (clientModel == null)
-                DataBaseHandler.addClient(name, phoneNumber, email, addressCl, type);
+                DataBaseHandler.addClient(name, phoneNumber, email, addressCl);
             else {
                 clientModel.setAddress(addressCl);
                 clientModel.setName(name);

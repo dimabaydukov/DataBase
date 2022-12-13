@@ -25,8 +25,14 @@
                 <ComboBox fx:id="clientIdContract" layoutX="105.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
             </children>
         </Group>
-        <Button fx:id="saveButtonContract" layoutX="254.0" layoutY="186.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
-        <Button fx:id="backButton" layoutX="519.0" layoutY="212.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" onAction="#onBackClick" text="Назад" />
+        <Group layoutX="46.0" layoutY="163.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="105.0" text="Номер питомца" />
+                <ComboBox fx:id="petIdContract" layoutX="105.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
+            </children>
+        </Group>
+        <Button fx:id="saveButtonContract" layoutX="262.0" layoutY="212.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
+        <Button fx:id="backButton" layoutX="519.0" layoutY="212.0" mnemonicParsing="false" onAction="#onBackClick" prefHeight="26.0" prefWidth="53.0" text="Назад" />
     </children>
 
 </AnchorPane>

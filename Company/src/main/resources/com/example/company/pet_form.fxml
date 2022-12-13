@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="270.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.PetFormController">
+    <children>
+        <Label fx:id="labelError" layoutX="46.0" layoutY="20.0" textFill="red" />
+        <Group layoutX="46.0" layoutY="53.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="87.0" text="Имя питомца" />
+                <TextField fx:id="namePet" layoutX="117.0" layoutY="-4.0" prefHeight="26.0" prefWidth="369.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="88.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="117.0" text="Вид животного" />
+                <TextField fx:id="kindOfAnimal" layoutX="117.0" layoutY="-4.0" prefHeight="26.0" prefWidth="371.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="123.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="117.0" text="Возраст питомца" />
+                <TextField fx:id="agePet" layoutX="117.0" layoutY="-4.0" prefHeight="26.0" prefWidth="371.0" />
+            </children>
+        </Group>
+        <Group layoutX="46.0" layoutY="158.0">
+            <children>
+                <Label prefHeight="18.0" prefWidth="117.0" text="Пол питомца" />
+                <ComboBox fx:id="sexPet" layoutX="117.0" layoutY="-4.0" prefHeight="26.0" prefWidth="371.0" />
+            </children>
+        </Group>
+        <Button fx:id="saveButtonPet" layoutX="263.0" layoutY="217.0" mnemonicParsing="false" onAction="#onClickSaveBtn" text="Сохранить" />
+        <Button fx:id="backButton" layoutX="523.0" layoutY="216.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="53.0" onAction="#onBackClick" text="Назад" />
+    </children>
+
+</AnchorPane>

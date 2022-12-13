@@ -7,6 +7,15 @@ public class ContractModel {
     private String description;
     private Date dateCreate;
     private int clientId;
+    private int petId;
+
+    public int getPetId() {
+        return petId;
+    }
+
+    public void setPetId(int petId) {
+        this.petId = petId;
+    }
 
     public int getId() {
         return id;
