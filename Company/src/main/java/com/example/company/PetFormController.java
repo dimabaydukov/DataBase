@@ -1,6 +1,5 @@
 package com.example.company;
 
-import com.example.company.model.ClientModel;
 import com.example.company.model.DataBaseHandler;
 import com.example.company.model.PetModel;
 import javafx.collections.FXCollections;
@@ -54,6 +53,9 @@ public class PetFormController implements Initializable {
 
         if (name.equals("") || kind.equals("") || Integer.parseInt(age) < 0 || Integer.parseInt(age) > 99
                 || age.equals("") || sexPet.getValue()==null){
+            labelError.setText("Данные введены некорректно!");
+        }
+        else if (kind.length() > 20 || name.length() > 20){
             labelError.setText("Данные введены некорректно!");
         }
         else {

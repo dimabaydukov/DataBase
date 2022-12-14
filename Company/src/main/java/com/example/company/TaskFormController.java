@@ -27,6 +27,8 @@ public class TaskFormController implements Initializable {
     public Button backButton;
     public TextArea descriptionTask;
     public Label labelError;
+    public Label clientNameCnt;
+    public Label petNameCnt;
     ObservableList<Integer> priorityList = FXCollections.observableArrayList(1,2,3);
     ObservableList<Integer> contractList = FXCollections.observableArrayList();
     ObservableList<String> employeeList = FXCollections.observableArrayList();
@@ -47,6 +49,15 @@ public class TaskFormController implements Initializable {
             throw new RuntimeException(e);
         }
         contractTask.setItems(contractList);
+        contractTask.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    try {
+                        showContractDetails(newValue);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+        );
 
         employeeTask.getItems().setAll(employeeList);
         try {
@@ -57,8 +68,14 @@ public class TaskFormController implements Initializable {
         employeeTask.setItems(employeeList);
     }
 
+    private void showContractDetails(Integer contractID) throws SQLException {
+        petNameCnt.setText(DataBaseHandler.selectCurrentPetName(contractID));
+        clientNameCnt.setText(DataBaseHandler.selectCurrentClientName(contractID));
+    }
+
     public void saveBtnOnClick() throws SQLException {
         labelError.setText("");
+        boolean status = false;
         String name = nameTask.getText().trim();
         String description = descriptionTask.getText().trim();
         Date dateCreate = Date.valueOf(LocalDate.now());
@@ -66,15 +83,16 @@ public class TaskFormController implements Initializable {
         if (dateDeadlineTask.getValue() != null)
             deadline = Date.valueOf(dateDeadlineTask.getValue());
         Date dateEnd = null;
-        if (dateEndTask.getValue() != null)
+        if (dateEndTask.getValue() != null) {
             dateEnd = Date.valueOf(dateEndTask.getValue());
+            status = true;
+        }
         String priority = priorityTask.getValue().toString();
-        boolean status = false;
         int idContract = contractTask.getValue();
         String employeeName = employeeTask.getValue();
         String managerName = SignInFormController.currentUser;
 
-        if (!name.equals("") && name.length() <= 30) {
+        if (!name.equals("") && name.length() <= 30 && dateCreate.equals("") && deadline.equals("")) {
             if (taskModel == null) {
                 DataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract,
                         employeeName, managerName, dateEnd);
@@ -105,7 +123,8 @@ public class TaskFormController implements Initializable {
             labelError.setText("Название не может быть пустым!!!");
         else if (name.length() > 30)
             labelError.setText("Название не должно превышать 30 символов!");
-
+        else
+            labelError.setText("Данные введены некорректно!");
     }
 
     public void setTaskInForm(TaskModel task){

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="353.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ManagerStartFormController">
+<AnchorPane fx:id="anchorPane" prefHeight="437.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.ManagerStartFormController">
    <children>
       <Button fx:id="addNewTaskBtn" layoutX="60.0" layoutY="45.0" mnemonicParsing="false" onAction="#addNewTaskForm" prefHeight="26.0" prefWidth="174.0" text="Добавление нового задания" />
       <Button fx:id="allTasksBtn" layoutX="277.0" layoutY="45.0" mnemonicParsing="false" onAction="#addNewTaskListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех заданий" />
@@ -14,8 +14,10 @@
       <Button fx:id="addNewEquipmentBtn" layoutX="60.0" layoutY="165.0" mnemonicParsing="false" onAction="#addNewEquipmentForm" prefHeight="26.0" prefWidth="174.0" text="Добавление оборудования" />
       <Button fx:id="allEquipmentsBtn" layoutX="277.0" layoutY="165.0" mnemonicParsing="false" onAction="#addNewEquipmentListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр оборудования" />
       <Button fx:id="reportEmployee" layoutX="158.0" layoutY="253.0" mnemonicParsing="false" onAction="#newReportEmployee" text="Составить отчет по сотрудникам" />
-      <Button fx:id="reportTask" layoutX="167.0" layoutY="290.0" mnemonicParsing="false" onAction="#newReportTask" text="Составить отчет по заданиям" />
+      <Button fx:id="reportTask" layoutX="159.0" layoutY="290.0" mnemonicParsing="false" onAction="#newReportTask" prefHeight="26.0" prefWidth="197.0" text="Составить отчет по заданиям" />
       <Button fx:id="addNewPetBtn" layoutX="61.0" layoutY="205.0" mnemonicParsing="false" onAction="#addNewPetForm" prefHeight="26.0" prefWidth="174.0" text="Добавление питомца" />
       <Button fx:id="allPetsBtn" layoutX="277.0" layoutY="205.0" mnemonicParsing="false" onAction="#addNewPetListForm" prefHeight="26.0" prefWidth="174.0" text="Просмотр всех питомцев" />
+      <Button fx:id="registrationBtn" layoutX="117.0" layoutY="336.0" mnemonicParsing="false" onAction="#onRegistrationClick" prefHeight="26.0" prefWidth="278.0" text="Зарегистрировать нового пользователя" />
+      <Button fx:id="allEmployees" layoutX="116.0" layoutY="376.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="278.0" onAction="#employeeOnClick" text="Открыть список сотрудников" />
    </children>
 </AnchorPane>

@@ -31,6 +31,8 @@ public class ManagerStartFormController implements Initializable {
     public AnchorPane anchorPane;
     public Button addNewPetBtn;
     public Button allPetsBtn;
+    public Button registrationBtn;
+    public Button allEmployees;
 
 
     public void addNewTaskForm(){
@@ -195,8 +197,42 @@ public class ManagerStartFormController implements Initializable {
             reportTask.setStyle("-fx-text-fill: #14ad11");
     }
 
+    public void onRegistrationClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("registration_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Hello!");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public void employeeOnClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("employee_list_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Employees!");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!SignInFormController.currentUser.equals("admi")){
+            registrationBtn.setVisible(false);
+            allEmployees.setVisible(false);
+        }
         anchorPane.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>(){
                     @Override

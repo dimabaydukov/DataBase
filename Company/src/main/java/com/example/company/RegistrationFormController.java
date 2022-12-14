@@ -1,6 +1,7 @@
 package com.example.company;
 
 import com.example.company.model.DataBaseHandler;
+import com.example.company.model.EmployeeModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegistrationFormController {
     public TextField loginNewUser;
@@ -42,13 +45,13 @@ public class RegistrationFormController {
             else
                 role = "manager";
 
-            if (!login.equals("") && !login.equals("Введите логин!!!") &&
-                    !pass.equals("") && !pass.equals("Введите пароль!!!")){
+            if (!login.equals("") && !pass.equals("")){
                 if (phone.equals("") || email.equals("") || name.equals(""))
                     labelError.setText("Введены не все данные!");
                 else {
                     if (name.length() <= 30 && phone.length() <= 11
-                            && email.length() <= 30 && login.length() <= 10) {
+                            && email.length() <= 30 && login.length() <= 10
+                            && pass.length() >= 8 && validPass(pass)) {
                         DataBaseHandler dataBaseHandler = new DataBaseHandler();
                         boolean flag = dataBaseHandler.registering(name, pass, role, phone, email, login);
                         if (flag) {
@@ -64,6 +67,8 @@ public class RegistrationFormController {
                         labelError.setText("Эл. почта должна быть меньше 30 символов!");
                     else if (loginNewUser.getText().length() > 10)
                         labelError.setText("Логин должен содержать до 10 символов!");
+                    else
+                        labelError.setText("Пароль должен быть >= 8 символов, содержать заглавные и строчные буквы латиницы и цифры");
                 }
             }
             else if (login.equals(""))
@@ -109,5 +114,14 @@ public class RegistrationFormController {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
+    }
+
+    private boolean validPass(String pass){
+        String regex = "^(?=.*[0-9])"
+                + "(?=.*[a-z])(?=.*[A-Z])"
+                + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(pass);
+        return m.matches();
     }
 }

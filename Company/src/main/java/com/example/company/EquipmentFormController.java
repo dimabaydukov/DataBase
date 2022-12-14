@@ -45,6 +45,8 @@ public class EquipmentFormController {
             labelError.setText("Введены не все данные!!");
         else if (name.length() > 20)
             labelError.setText("Название не должно превышать 20 символов!");
+        else if (type.length() > 20)
+            labelError.setText("Тип оборудования не должен превышать 20 символов!");
     }
 
     public void setDetailInForm(EquipmentModel detail){

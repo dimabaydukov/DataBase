@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HelloController {
-    public Button registrationButton;
     @FXML
     private Button signInButton;
 
@@ -30,26 +29,7 @@ public class HelloController {
             stage.setScene(scene);
             stage.show();
 
-            Stage stageThis = (Stage) registrationButton.getScene().getWindow();
-            stageThis.close();
-        } catch (IOException e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Failed to create new Window.", e);
-        }
-    }
-
-    @FXML
-    protected void onRegistrationClick() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("registration_form.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
-            stage.setTitle("Hello!");
-            stage.setScene(scene);
-            stage.show();
-
-            Stage stageThis = (Stage) registrationButton.getScene().getWindow();
+            Stage stageThis = (Stage) signInButton.getScene().getWindow();
             stageThis.close();
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());

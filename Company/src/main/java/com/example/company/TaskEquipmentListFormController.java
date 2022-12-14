@@ -20,6 +20,7 @@ public class TaskEquipmentListFormController implements Initializable {
     public Label nameLabel;
     public Label vendorCodeLabel;
     public Button deleteBtn;
+    public Label typeLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,10 +51,12 @@ public class TaskEquipmentListFormController implements Initializable {
         if (equipmentModel != null) {
             nameLabel.setText(equipmentModel.getName());
             vendorCodeLabel.setText(String.valueOf(equipmentModel.getVendorCode()));
+            typeLabel.setText(equipmentModel.getType());
         }
         else {
             nameLabel.setText(null);
             vendorCodeLabel.setText(null);
+            typeLabel.setText(null);
         }
     }
 

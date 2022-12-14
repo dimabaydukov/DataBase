@@ -16,6 +16,7 @@ import java.util.ResourceBundle;
 
 public class NewEquipmentForTaskController implements Initializable {
     public ComboBox<Integer> idEquipments;
+    public Label typeLabel;
     ObservableList<Integer> equipmentsIdList = FXCollections.observableArrayList();
     public Label nameLabel;
     public Label vendorCodeLabel;
@@ -38,6 +39,7 @@ public class NewEquipmentForTaskController implements Initializable {
 
         nameLabel.setText(null);
         vendorCodeLabel.setText(null);
+        typeLabel.setText(null);
 
         idEquipments.setOnAction(event -> detailInformation(idEquipments.getSelectionModel().getSelectedItem()));
     }
@@ -48,6 +50,7 @@ public class NewEquipmentForTaskController implements Initializable {
             if (equipmentModel != null) {
                 nameLabel.setText(equipmentModel.getName());
                 vendorCodeLabel.setText(String.valueOf(equipmentModel.getVendorCode()));
+                typeLabel.setText(equipmentModel.getType());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

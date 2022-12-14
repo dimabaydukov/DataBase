@@ -28,8 +28,7 @@ public class SignInFormController {
 
         labelError.setText("");
 
-        if (!login.equals("") && !login.equals("Введите логин!!!") &&
-                !pass.equals("") && !pass.equals("Введите пароль!!!")){
+        if (!login.equals("") && !pass.equals("")){
             DataBaseHandler dataBaseHandler = new DataBaseHandler();
             DataBaseHandler.connection = dataBaseHandler.getDbConnection(login, pass);
             if (DataBaseHandler.connection == null)
@@ -37,13 +36,19 @@ public class SignInFormController {
             else {
                 String role = DataBaseHandler.checkRole(login);
                 if (role != null){
-                    if (role.equals("manager")) {
+                    if (role.equals("manager")){
                         currentUser = login;
                         goToManagerStartForm();
                     }
-                    if (role.equals("doctor")) {
+                    if (role.equals("doctor")){
                         currentUser = login;
                         goToDoctorStartForm();
+                    }
+                }
+                else {
+                    if (login.equals("admi")){
+                        currentUser = login;
+                        goToManagerStartForm();
                     }
                 }
             }

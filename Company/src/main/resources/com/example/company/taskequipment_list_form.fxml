@@ -8,8 +8,10 @@
         <TableView fx:id="listEquipments" layoutX="27.0" layoutY="28.0" prefHeight="194.0" prefWidth="110.0" />
         <Label layoutX="157.0" layoutY="59.0" text="Название" />
         <Label layoutX="157.0" layoutY="106.0" text="Код" />
+        <Label layoutX="157.0" layoutY="159.0" text="Тип оборудования" />
         <Label fx:id="nameLabel" layoutX="299.0" layoutY="59.0" text="*name*" />
         <Label fx:id="vendorCodeLabel" layoutX="299.0" layoutY="106.0" text="*vendor code*" />
+        <Label fx:id="typeLabel" layoutX="299.0" layoutY="159.0" text="*type*" />
         <Button fx:id="deleteBtn" layoutX="339.0" layoutY="196.0" mnemonicParsing="false" onAction="#deleteOnClick"
                 text="Удалить из задания" />
     </children>

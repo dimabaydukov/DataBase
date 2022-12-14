@@ -29,22 +29,21 @@ public class DataBaseHandler extends Config {
                                String phone, String email, String login) throws SQLException, ClassNotFoundException {
         getDbConnection();
 
-        Statement statement = null;
-        statement = connection.createStatement();
-
-        String queryUser = "CREATE ROLE " + login + " WITH\n" +
+        String queryUser = "CREATE ROLE ? WITH\n" +
                 "LOGIN\n" +
                 "NOSUPERUSER\n" +
                 "INHERIT\n" +
                 "NOCREATEDB\n" +
                 "NOCREATEROLE\n" +
                 "NOREPLICATION\n" +
-                "PASSWORD \'" + password + "\';\n" +
-                "GRANT " + role + " TO " + login;
+                "PASSWORD "+ password + ";\n" +
+                "GRANT ? TO ?";
+        PreparedStatement preparedStatementUser = connection.prepareStatement(queryUser);
+        preparedStatementUser.setString(1, login);
+        preparedStatementUser.setString(2, role);
+        preparedStatementUser.setString(3, login);
 
-        String queryEmployee = "INSERT INTO public.\"Employee\" (name_employee, phone_number_employee, email_employee, " +
-                "title, login_employee) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String queryEmployee = "CALL insert_employee(?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(queryEmployee);
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, phone);
@@ -53,9 +52,9 @@ public class DataBaseHandler extends Config {
         preparedStatement.setString(5, login);
 
         try {
-            statement.executeUpdate(queryUser);
+            preparedStatementUser.executeUpdate();
             preparedStatement.executeUpdate();
-            statement.close();
+            preparedStatement.close();
             preparedStatement.close();
             connection.close();
             return true;
@@ -147,60 +146,60 @@ public class DataBaseHandler extends Config {
 
     public static List<Integer> selectIdClients() throws SQLException {
         String query = "SELECT select_id_clients()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<Integer> listIdClients = new ArrayList<>();
         while(resultSet.next()){
             int id = resultSet.getInt("select_id_clients");
             listIdClients.add(id);
         }
-        statement.close();
+        preparedStatement.close();
         return listIdClients;
     }
 
     public static List<Integer> selectIdPets() throws SQLException {
         String query = "SELECT select_id_pets()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<Integer> listIdPets = new ArrayList<>();
         while(resultSet.next()){
             int id = resultSet.getInt("select_id_pets");
             listIdPets.add(id);
         }
-        statement.close();
+        preparedStatement.close();
         return listIdPets;
     }
 
     public static List<Integer> selectIdContracts() throws SQLException {
         String query = "SELECT select_id_contracts()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<Integer> listIdContracts = new ArrayList<>();
         while(resultSet.next()){
             int id = resultSet.getInt("select_id_contracts");
             listIdContracts.add(id);
         }
-        statement.close();
+        preparedStatement.close();
         return listIdContracts;
     }
 
     public static List<String> selectEmployeeLogins() throws SQLException {
         String query = "SELECT select_emp_logins()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<String> listEmployeeNames = new ArrayList<>();
         while(resultSet.next()){
             String name = resultSet.getString("select_emp_logins");
             listEmployeeNames.add(name);
         }
-        statement.close();
+        preparedStatement.close();
         return listEmployeeNames;
     }
 
     public static List<TaskModel> selectAllTasks() throws SQLException {
         String query = "SELECT * FROM select_all_tasks()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<TaskModel> list = new ArrayList<>();
         while(resultSet.next()){
             TaskModel task = new TaskModel();
@@ -217,14 +216,14 @@ public class DataBaseHandler extends Config {
             task.setManager(resultSet.getString("manager_name"));
             list.add(task);
         }
-        statement.close();
+        preparedStatement.close();
         return list;
     }
 
     public static List<ContractModel> selectAllContracts() throws SQLException {
         String query = "SELECT * FROM select_all_contracts()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<ContractModel> list = new ArrayList<>();
         while(resultSet.next()){
             ContractModel contract = new ContractModel();
@@ -235,14 +234,14 @@ public class DataBaseHandler extends Config {
             contract.setPetId(resultSet.getInt("id_pet"));
             list.add(contract);
         }
-        statement.close();
+        preparedStatement.close();
         return list;
     }
 
     public static List<PetModel> selectAllPets() throws SQLException {
         String query = "SELECT * FROM select_all_pets()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<PetModel> list = new ArrayList<>();
         while(resultSet.next()){
             PetModel pet = new PetModel();
@@ -253,7 +252,7 @@ public class DataBaseHandler extends Config {
             pet.setName(resultSet.getString("animal_name"));
             list.add(pet);
         }
-        statement.close();
+        preparedStatement.close();
         return list;
     }
 
@@ -298,8 +297,8 @@ public class DataBaseHandler extends Config {
 
     public static List<ClientModel> selectAllClients() throws SQLException {
         String query = "SELECT * FROM select_all_clients()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<ClientModel> list = new ArrayList<>();
         while(resultSet.next()){
             ClientModel client = new ClientModel();
@@ -310,18 +309,16 @@ public class DataBaseHandler extends Config {
             client.setAddress(resultSet.getString("address"));
             list.add(client);
         }
-        statement.close();
+        preparedStatement.close();
         return list;
     }
 
-    //TODO: search
     public static List<ClientModel> selectSearchClients(String search) throws SQLException {
-        String query = "SELECT * FROM \"Client\" WHERE name_client LIKE \'%"+ search +"%\' " +
-                "OR address LIKE \'%"+ search +"%\'\n" +
-                "OR email_client LIKE \'%"+ search +"%\' " +
-                "OR phone_number_client LIKE \'%"+ search +"%\'";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        String searchF = "%" + search + "%";
+        String query = "SELECT * FROM search_clients(?)";
+        PreparedStatement statement = DataBaseHandler.connection.prepareStatement(query);
+        statement.setString(1, searchF);
+        ResultSet resultSet = statement.executeQuery();
         List<ClientModel> list = new ArrayList<>();
         while(resultSet.next()){
             ClientModel client = new ClientModel();
@@ -338,8 +335,8 @@ public class DataBaseHandler extends Config {
 
     public static List<EquipmentModel> selectAllEquipments() throws SQLException {
         String query = "SELECT * FROM select_all_equipments()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<EquipmentModel> list = new ArrayList<>();
         while(resultSet.next()){
             EquipmentModel equipmentModel = new EquipmentModel();
@@ -349,19 +346,19 @@ public class DataBaseHandler extends Config {
             equipmentModel.setType(resultSet.getString("type_equipment"));
             list.add(equipmentModel);
         }
-        statement.close();
+        preparedStatement.close();
         return list;
     }
 
     public static List<Integer> selectAllEquipmentsId() throws SQLException {
         String query = "SELECT select_all_equipments_id()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
         List<Integer> list = new ArrayList<>();
         while(resultSet.next()){
             list.add(resultSet.getInt("select_all_equipments_id"));
         }
-        statement.close();
+        preparedStatement.close();
         return list;
     }
 
@@ -536,6 +533,30 @@ public class DataBaseHandler extends Config {
         return id;
     }
 
+    public static String selectCurrentPetName(int id) throws SQLException {
+        String query = "SELECT select_name_pet_contract(?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            return resultSet.getString("select_name_pet_contract");
+        }
+        preparedStatement.close();
+        return null;
+    }
+
+    public static String selectCurrentClientName(int id) throws SQLException {
+        String query = "SELECT select_name_client_contract(?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next()){
+            return resultSet.getString("select_name_client_contract");
+        }
+        preparedStatement.close();
+        return null;
+    }
+
     public static int selectCurrentTaskId(String name, String description, Date dateCreate, Date deadline, String priority,
                                boolean status, int idContract, String employeeName, String managerName)
             throws SQLException {
@@ -559,6 +580,25 @@ public class DataBaseHandler extends Config {
         return id;
     }
 
+    public static List<EmployeeModel> selectAllEmployee() throws SQLException {
+        String query = "SELECT * FROM public.\"allEmployees\"";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<EmployeeModel> list = new ArrayList<>();
+        while(resultSet.next()){
+            EmployeeModel employeeModel = new EmployeeModel();
+            employeeModel.setId(resultSet.getInt("id_employee"));
+            employeeModel.setName(resultSet.getString("name_employee"));
+            employeeModel.setPhone(resultSet.getString("phone_number_employee"));
+            employeeModel.setEmail(resultSet.getString("email_employee"));
+            employeeModel.setTitle(resultSet.getString("title"));
+            employeeModel.setLogin(resultSet.getString("login_employee"));
+            list.add(employeeModel);
+        }
+        preparedStatement.close();
+        return list;
+    }
+
     public static void addEmployeeTask(int idEmp, int idTask, String pos) throws SQLException {
         String query = "CALL insert_employeetask(?, ?, ?)";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
@@ -569,9 +609,28 @@ public class DataBaseHandler extends Config {
         preparedStatement.close();
     }
 
+    public static void deleteEmployee(EmployeeModel employeeModel) throws SQLException {
+        String query = "CALL delete_employee(?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        preparedStatement.setInt(1, employeeModel.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
+    public static void updateEmployee(EmployeeModel employeeModel) throws SQLException {
+        String query = "CALL update_employee(?,?,?,?,?)";
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        preparedStatement.setString(1, employeeModel.getName());
+        preparedStatement.setString(2, employeeModel.getEmail());
+        preparedStatement.setString(3, employeeModel.getTitle());
+        preparedStatement.setString(4, employeeModel.getPhone());
+        preparedStatement.setInt(5, employeeModel.getId());
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+    }
+
     public static void updateEmployeeTask(int idEmp, int idTask, int newIdEmp) throws SQLException {
-        String query = "UPDATE public.\"Employee_Task\" SET \"Employee_id_employee\" = ?" +
-                "WHERE \"Employee_id_employee\" = ? AND \"Task_id_task\" = ? AND position = \'И\'";
+        String query = "CALL update_employee_task(?, ?, ?)";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
         preparedStatement.setInt(1, newIdEmp);
         preparedStatement.setInt(2, idEmp);
@@ -581,8 +640,7 @@ public class DataBaseHandler extends Config {
     }
 
     public static void deleteEmployeeTask(int idEmp, int idTask) throws SQLException {
-        String query = "DELETE FROM public.\"Employee_Task\" WHERE \"Employee_id_employee\" = ?" +
-                "AND \"Task_id_task\" = ?";
+        String query = "CALL delete_employee_task(?, ?)";
         PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
         preparedStatement.setInt(1, idEmp);
         preparedStatement.setInt(2, idTask);
@@ -592,23 +650,23 @@ public class DataBaseHandler extends Config {
 
     public static boolean createReportTask() throws SQLException {
         String query = "CALL create_report_task()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        if (statement.execute(query)){
-            statement.close();
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        if (preparedStatement.execute()){
+            preparedStatement.close();
             return true;
         }
-        statement.close();
+        preparedStatement.close();
         return false;
     }
 
     public static boolean createReportEmployee() throws SQLException {
         String query = "CALL create_report_employee()";
-        Statement statement = DataBaseHandler.connection.createStatement();
-        if (statement.execute(query)){
-            statement.close();
+        PreparedStatement preparedStatement = DataBaseHandler.connection.prepareStatement(query);
+        if (preparedStatement.execute()){
+            preparedStatement.close();
             return true;
         }
-        statement.close();
+        preparedStatement.close();
         return false;
     }
 }

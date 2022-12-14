@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="450.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskFormController">
+<AnchorPane prefHeight="525.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.company.TaskFormController">
 
     <children>
         <Group layoutX="46.0" layoutY="53.0">
@@ -37,33 +37,37 @@
                 <ComboBox fx:id="contractTask" layoutX="65.0" layoutY="-3.0" prefHeight="25.0" prefWidth="134.0" />
             </children>
         </Group>
-        <Group layoutX="46.0" layoutY="270.0">
+        <Group layoutX="45.0" layoutY="329.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="73.0" text="Сотрудник" />
                 <ComboBox fx:id="employeeTask" layoutX="73.0" layoutY="-3.0" prefHeight="25.0" prefWidth="417.0" />
             </children>
         </Group>
-        <Group layoutX="46.0" layoutY="315.0">
+        <Group layoutX="45.0" layoutY="374.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="112.0" text="Дата окончания" />
                 <DatePicker fx:id="dateEndTask" layoutX="101.0" layoutY="-3.0" prefHeight="25.0" prefWidth="391.0" />
             </children>
         </Group>
-        <Group layoutX="46.0" layoutY="360.0">
+        <Group layoutX="45.0" layoutY="419.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="112.0" text="Дата создания:" />
                 <Label fx:id="dateCreateTask" layoutX="90.0" prefHeight="18.0" prefWidth="112.0" text="*автозаполнение*" />
             </children>
         </Group>
-        <Group layoutX="46.0" layoutY="380.0">
+        <Group layoutX="45.0" layoutY="439.0">
             <children>
                 <Label prefHeight="18.0" prefWidth="112.0" text="Статус:" />
                 <Label fx:id="statusTask" layoutX="45.0" prefHeight="18.0" prefWidth="112.0" text="*автозаполнение*" />
             </children>
         </Group>
-      <Button fx:id="saveButtonTask" layoutX="398.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
-      <Button fx:id="backButton" layoutX="489.0" layoutY="398.0" mnemonicParsing="false" onAction="#onBackClick" text="Назад" />
+      <Button fx:id="saveButtonTask" layoutX="398.0" layoutY="476.0" mnemonicParsing="false" onAction="#saveBtnOnClick" text="Сохранить" />
+      <Button fx:id="backButton" layoutX="489.0" layoutY="476.0" mnemonicParsing="false" onAction="#onBackClick" text="Назад" />
       <Label fx:id="labelError" layoutX="46.0" layoutY="20.0" textFill="red" />
+      <Label layoutX="289.0" layoutY="262.0" text="Имя клиента:" />
+      <Label fx:id="clientNameCnt" layoutX="378.0" layoutY="262.0" />
+      <Label layoutX="289.0" layoutY="294.0" text="Имя питомца:" />
+      <Label fx:id="petNameCnt" layoutX="378.0" layoutY="294.0" />
     </children>
 
 </AnchorPane>
