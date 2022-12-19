@@ -92,7 +92,7 @@ public class TaskFormController implements Initializable {
         String employeeName = employeeTask.getValue();
         String managerName = SignInFormController.currentUser;
 
-        if (!name.equals("") && name.length() <= 30 && dateCreate.equals("") && deadline.equals("")) {
+        if (!name.equals("") && name.length() <= 30 && deadline != null) {
             if (taskModel == null) {
                 DataBaseHandler.addTask(name, description, dateCreate, deadline, priority, status, idContract,
                         employeeName, managerName, dateEnd);
