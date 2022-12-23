@@ -229,7 +229,7 @@ public class ManagerStartFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!SignInFormController.currentUser.equals("admin")){
+        if (!SignInFormController.currentUser.equals("admi")){
             registrationBtn.setVisible(false);
             allEmployees.setVisible(false);
         }

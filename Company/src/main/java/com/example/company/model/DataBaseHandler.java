@@ -29,19 +29,19 @@ public class DataBaseHandler extends Config {
                                String phone, String email, String login) throws SQLException, ClassNotFoundException {
         getDbConnection();
 
-        String queryUser = "CREATE ROLE ? WITH\n" +
+        String queryUser = "CREATE ROLE "+ login +" WITH\n" +
                 "LOGIN\n" +
                 "NOSUPERUSER\n" +
                 "INHERIT\n" +
                 "NOCREATEDB\n" +
                 "NOCREATEROLE\n" +
                 "NOREPLICATION\n" +
-                "PASSWORD "+ password + ";\n" +
-                "GRANT ? TO ?";
+                "PASSWORD \'"+ password + "\';\n" +
+                "GRANT " + role + " TO " + login + "";
         PreparedStatement preparedStatementUser = connection.prepareStatement(queryUser);
-        preparedStatementUser.setString(1, login);
-        preparedStatementUser.setString(2, role);
-        preparedStatementUser.setString(3, login);
+//        preparedStatementUser.setString(1, login);
+//        preparedStatementUser.setString(2, role);
+//        preparedStatementUser.setString(3, login);
 
         String queryEmployee = "CALL insert_employee(?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(queryEmployee);
@@ -59,6 +59,7 @@ public class DataBaseHandler extends Config {
             connection.close();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }

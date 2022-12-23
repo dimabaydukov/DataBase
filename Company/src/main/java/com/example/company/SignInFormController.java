@@ -44,10 +44,8 @@ public class SignInFormController {
                         currentUser = login;
                         goToDoctorStartForm();
                     }
-                }
-                else {
-                    if (login.equals("admi")){
-                        currentUser = "admin";
+                    if (role.equals("admin")){
+                        currentUser = login;
                         goToManagerStartForm();
                     }
                 }

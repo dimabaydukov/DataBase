@@ -1,7 +1,6 @@
 package com.example.company;
 
 import com.example.company.model.DataBaseHandler;
-import com.example.company.model.EmployeeModel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
